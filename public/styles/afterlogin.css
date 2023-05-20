@@ -1,0 +1,37 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: flex-start;
+    height: 100%;
+    border: none;
+    padding: 0px;
+    margin: 0;
+    background: url(../pic/consumers-use-internet-shopping-concept.jpg);
+    background-size: cover;
+    
+}
+.ll{
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 100vh;
+    margin: 0px;
+    padding: 2rem;
+    padding-top: 25%;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 70%;
+    transform-origin: bottom;
+    transform: translateX(-20%) translateY(+5%) scale(1.35);
+}
+p{
+    display: flex;
+    justify-content: center;
+    
+    font-weight: 900;
+}
