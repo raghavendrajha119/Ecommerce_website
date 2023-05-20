@@ -3,19 +3,28 @@ package repository
 import (
 	"errors"
 
+	"database/sql"
+
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 )
 
 // Simulate a database call
-func FindByCredentials(email, password string) (*models.User, error) {
+func FindByCredentials(db *sql.DB, email, password string) (*models.User, error) {
 	// Here you would query your database for the user with the given email
-	if email == "test@mail.com" && password == "test12345" {
-		return &models.User{
-			ID:             1,
-			Email:          "test@mail.com",
-			Password:       "test12345",
-			FavoritePhrase: "Hello, World!",
-		}, nil
+	query := "SELECT * From users Where email = ? AND password = ?"
+	row, err := db.QueryRow(query, email, password)
+	if err != nil {
+		panic(err)
 	}
-	return nil, errors.New("user not found")
+	if row.Next() {
+		var user models.User
+		err = row.Scan(&user.ID, &user.Email, &user.Password, &user.FavouritePhrase)
+		if err != nil {
+			return nil, err
+		}
+		return &user, nil
+	} else {
+		return nil, errors.New("user not found")
+	}
+
 }

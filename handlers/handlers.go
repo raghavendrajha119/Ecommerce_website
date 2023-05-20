@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,6 +11,10 @@ import (
 	"github.com/raghavendrajha119/Ecommerce_website/repository"
 )
 
+func LoginPg(c *fiber.Ctx) error {
+	return c.Render("public/Home.html", map[string]interface{}{})
+}
+
 // Login route
 func Login(c *fiber.Ctx) error {
 	// Extract the credentials from the request body
@@ -18,6 +23,12 @@ func Login(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": err.Error(),
 		})
+	}
+
+	//connecting with database
+	db, err := sql.Open("postgres", "postgresql://postgres:Raghav@123@localhost:5432/lib?sslmode=disable")
+	if err != nil {
+		panic(err)
 	}
 	// Find the user by credentials
 	user, err := repository.FindByCredentials(loginRequest.Email, loginRequest.Password)

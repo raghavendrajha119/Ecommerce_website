@@ -12,6 +12,7 @@ type LoginResponse struct {
 type User struct {
  ID             int
  Email          string
+ Username		string
  Password       string
  FavoritePhrase string
 }
