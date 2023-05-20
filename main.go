@@ -15,10 +15,16 @@ func main() {
 	jwt := middlewares.NewAuthMiddleware(config.Secret)
 	// Create a Login route
 	app.Static("/", "./public")
-	app.Get("/login", handlers.LoginPg)
+
 	app.Post("/login", handlers.Login)
 	// Create a protected route
 	app.Get("/protected", jwt, handlers.Protected)
+	//registration page
+	app.Get("/register", handlers.Register)
+	app.Post("/register", handlers.RegisterPost)
+	app.Get("/registered", handlers.RegisterSuccessful)
+	app.Get("/loginpg", handlers.LoginPg)
+	app.Post("/loginpg", handlers.LoginPack)
 	// Listen on port 3000
 	app.Listen(":3000")
 }

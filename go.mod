@@ -4,12 +4,12 @@ go 1.20
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/gofiber/fiber/v2 v2.45.0 // indirect
-	github.com/gofiber/jwt/v3 v3.3.9 // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
+	github.com/gofiber/fiber/v2 v2.45.0 // direct
+	github.com/gofiber/jwt/v3 v3.3.9 // direct
+	github.com/golang-jwt/jwt/v4 v4.5.0 // direct
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
-	github.com/lib/pq v1.10.9 // indirect
+	github.com/lib/pq v1.10.9 // direct
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
