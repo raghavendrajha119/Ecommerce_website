@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+    <header class="op">
+        <div class="intro">
+            <h2>  Login </h2>
+            
+            <h3>Enjoy Shopping...</h3>
+            <hr>
+        </div>
+        <form class="form" id="loginForm">
+            <input type="email" placeholder="email" name="email" id="email" required>
+            <input type="password" placeholder = "password" name="password" id="password" required>
+            <button type="submit" id="submit">Login</button>
+        </form>
+        <script>
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+              event.preventDefault();
+        
+              var email = document.getElementById("email").value;
+              var password = document.getElementById("password").value;
+        
+              var data = {
+                email: email,
+                password: password
+              };
+        
+              fetch("/login", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+              })
+              .then(function(response) {
+                return response.json();
+              })
+              .then(function(data) {
+                // Handle the response from the server
+                console.log(data);
+                // Redirect to another page or perform any desired action
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+            });
+          </script>
+
+    </header>
+    
+    
+</body>
+</html>

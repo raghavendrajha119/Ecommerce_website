@@ -1,0 +1,37 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+.heading{
+    padding: 15px;
+    padding-top: 25px;
+    font-family:'Comme', sans-serif;
+    font-style:italic;
+    color: rgb(11, 145, 235);
+    font-size: 23px;
+    font-weight: 850;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.nav_bar{
+    display: flex;
+    justify-content:space-around;
+    background-color: black;
+    flex-direction: row;
+    padding: 15px;
+    
+}
+a{
+    color: aliceblue;
+    font-size: 18px;
+    transition-duration: 1s;
+    text-decoration: none;
+}
+a:hover{
+    transform: scale(1.5);
+    font-size: larger;
+}
