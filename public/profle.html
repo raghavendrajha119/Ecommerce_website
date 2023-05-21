@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="./styles/profile.css">
+</head>
+<body >
+    <div class="op">
+        
+        <div class="intro">
+            <div style="display: flex; flex-direction: row; color: rgb(56, 70, 80);font-family:'Comme', sans-serif;padding-left: 45px; font-weight: 700;">
+                Name: {{.name}}
+            </div>
+            <div style="display: flex; flex-direction: row; color: rgb(56, 70, 80);font-family:'Comme', sans-serif;padding-left: 45px; font-weight: 700;">
+                Email : {{.email}}
+            </div>
+        </div>
+        <form action="/" class="form">
+            <button type="submit" id="submit">Home</button>
+        </form>
+    </div>
+    
+</body>
+</html>

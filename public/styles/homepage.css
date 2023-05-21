@@ -59,7 +59,7 @@ h3{
     gap: 15px;
     padding-top: 50px;
 }
-#name ,#email ,#password,#submit{
+#name ,#email ,#password{
     font-size: 25px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(7, 7, 8);
@@ -67,6 +67,16 @@ h3{
     border-color: black;
     font-style: oblique;
     padding: 15px;
+}
+#submit{
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 150px;
+    display: block;
+    padding: 8px 5px;
+    border-radius: 20px;
+    text-decoration: none;
+    background-color: #ff7846;
 }
 hr{
     z-index: 1;

@@ -13,6 +13,10 @@ import (
 	"github.com/raghavendrajha119/Ecommerce_website/repository"
 )
 
+func Home(c *fiber.Ctx) error {
+	return c.Render("public/Home.html", map[string]interface{}{})
+}
+
 // Login route
 func Login(c *fiber.Ctx) error {
 	// Extract the credentials from the request body
@@ -62,6 +66,7 @@ func Protected(c *fiber.Ctx) error {
 
 // Initial Login page
 func LoginPg(c *fiber.Ctx) error {
+
 	return c.Render("public/login.html", map[string]interface{}{"h1": "Log in here...."})
 }
 func LoginPack(c *fiber.Ctx) error {

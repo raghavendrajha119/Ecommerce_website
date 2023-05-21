@@ -15,7 +15,7 @@ func main() {
 	jwt := middlewares.NewAuthMiddleware(config.Secret)
 	// Create a Login route
 	app.Static("/", "./public")
-
+	app.Get("/", handlers.Home)
 	app.Post("/login", handlers.Login)
 	// Create a protected route
 	app.Get("/protected", jwt, handlers.Protected)

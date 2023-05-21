@@ -3,7 +3,11 @@
     margin: 0px;
 }
 
-
+h1{
+    font-family: 'Comme', sans-serif;
+    font-family: 'Roboto Slab', serif;
+    
+}
 
 .heading{
     padding: 15px;
@@ -24,6 +28,36 @@
     flex-direction: row;
     padding: 15px;
     
+}
+.nav_bar button{
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    margin-right: 20px;
+    font-size: 20px;
+    font: bold;
+}
+.btn-centre::after {
+    transform: scale(0,1);
+    transition: transform 0.3s ease;
+}
+.btn-centre:hover::after{
+    transform: scale(1,1);
+}
+.btn::after{
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 0.175rem;
+    background-color: #ff7846;
+    left: 0;
+    top: 95px;
+
+}
+.nav_bar a:hover{
+    color: #ff7846;
 }
 a{
     color: aliceblue;
