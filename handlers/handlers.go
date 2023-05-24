@@ -9,6 +9,7 @@ import (
 	jtoken "github.com/golang-jwt/jwt/v4"
 	_ "github.com/lib/pq"
 	"github.com/raghavendrajha119/Ecommerce_website/config"
+	"github.com/raghavendrajha119/Ecommerce_website/middlewares"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 	"github.com/raghavendrajha119/Ecommerce_website/repository"
 )
@@ -110,7 +111,7 @@ func RegisterPost(c *fiber.Ctx) error {
 		panic(err)
 	}
 	defer data.Close()
-	hashpassword, err := middlewares.hashPassword(result.Password)
+	hashpassword, err := middlewares.HashPassword(result.Password)
 	if err != nil {
 		return nil
 	}

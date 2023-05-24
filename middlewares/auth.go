@@ -12,7 +12,7 @@ func NewAuthMiddleware(secret string) fiber.Handler {
 		SigningKey: []byte(secret),
 	})
 }
-func hashPassword(password string) (string, error) {
+func HashPassword(password string) (string, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return "", err
@@ -20,7 +20,7 @@ func hashPassword(password string) (string, error) {
 	return string(hash), nil
 }
 
-func comparePasswords(hashedPwd, plainPwd string) bool {
+func ComparePasswords(hashedPwd, plainPwd string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPwd), []byte(plainPwd))
 	return err == nil
 }

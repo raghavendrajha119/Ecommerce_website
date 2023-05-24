@@ -7,6 +7,7 @@ import (
 	"database/sql"
 
 	_ "github.com/lib/pq"
+	"github.com/raghavendrajha119/Ecommerce_website/middlewares"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 )
 
@@ -43,11 +44,11 @@ func FindByCredentials(email, password string) (*models.User, error) {
 		return nil, err
 	}
 
-	passwordmatch := middlewares.comparePasswords(password, user.Password)
+	passwordmatch := middlewares.ComparePasswords(password, user.Password)
 	if passwordmatch {
 		return &user, nil
 	} else {
-		return nil, errors.New("Inavild password")
+		return nil, errors.New("invalid password")
 	}
 
 }
