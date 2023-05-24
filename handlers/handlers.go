@@ -110,7 +110,12 @@ func RegisterPost(c *fiber.Ctx) error {
 		panic(err)
 	}
 	defer data.Close()
-	_, err = data.Exec(result.Email, result.Password, result.Name)
+	hashpassword, err := middlewares.hashPassword(result.Password)
+	if err != nil {
+		return nil
+	}
+
+	_, err = data.Exec(result.Email, hashpassword, result.Name)
 	if err != nil {
 		panic(err)
 	}
