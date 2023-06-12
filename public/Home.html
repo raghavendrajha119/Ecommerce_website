@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comme&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comme&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     
 </head>
@@ -30,14 +28,16 @@
         <button ><a href="/">Home</a></button>
         <button><a href="Men">Men</a></button>
         <button><a href="Women">Women</a></button>
-        
-        <button><a href="/loginpg">Login</a></button>
+        {{ if .IsLoggedIn }}
+            <!-- once login the logout func pops out -->
+            <button><a href="/logout">Logout</a></button>
+        {{ else }}
+            <button><a href="/loginpg">Login</a></button>
+        {{ end }}
         <button><a href="/register">Register</a></button>
         <button><a href="Cart"><span class="material-symbols-outlined">
             shopping_cart_checkout
             </span></a></button> 
     </nav>
-
-    
 </body>
 </html>

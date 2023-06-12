@@ -15,7 +15,15 @@ import (
 )
 
 func Home(c *fiber.Ctx) error {
-	return c.Render("public/Home.html", map[string]interface{}{})
+	// check if the user is logged in
+
+	isLoggedIn := false
+	cookies := c.Cookies("authToken")
+	if len(cookies) > 0 {
+		isLoggedIn = true
+	}
+
+	return c.Render("public/Home.html", map[string]interface{}{"IsLoggedIn": isLoggedIn})
 }
 
 // Login route
@@ -49,10 +57,24 @@ func Login(c *fiber.Ctx) error {
 			"error": err.Error(),
 		})
 	}
-	// Return the token
-	return c.JSON(models.LoginResponse{
-		Token: t,
+	// store the token in cookies
+	c.Cookie(&fiber.Cookie{
+		Name:     "authToken",
+		Value:    t,
+		Expires:  time.Now().Add(time.Hour * 24), // Set the expiration time as desired
+		Secure:   true,                           // Set to true if using HTTPS
+		HTTPOnly: true,                           // Set to true to restrict access from client-side JavaScript
 	})
+	// Redirect the user to the desired page after successful login
+	return c.Redirect("/dashboard")
+}
+
+// Logout route
+func Logout(c *fiber.Ctx) error {
+	// Clear the authentication token cookie
+	c.ClearCookie("authToken")
+	// Redirect the user to the home page or any desired page
+	return c.Redirect("/")
 }
 
 // Protected route
@@ -81,7 +103,7 @@ func LoginPack(c *fiber.Ctx) error {
 		panic(err)
 	}
 
-	return c.Render("public/afterlogin.html", map[string]interface{}{"msg": "Welcome to Go Shopping " + row.Name + " Continue Shopping......"})
+	return c.Render("public/dashboard.html", map[string]interface{}{"msg": "Welcome to Go Shopping " + row.Name + " Continue Shopping......"})
 }
 
 // Initial user_register

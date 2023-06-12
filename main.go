@@ -25,6 +25,8 @@ func main() {
 	app.Get("/registered", handlers.RegisterSuccessful)
 	app.Get("/loginpg", handlers.LoginPg)
 	app.Post("/loginpg", handlers.LoginPack)
+	//logout
+	app.Get("/logout", handlers.Logout)
 	// Listen on port 3000
 	app.Listen(":3000")
 }

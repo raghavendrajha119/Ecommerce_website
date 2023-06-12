@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/dashstyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Go Profile</h1>
+        <hr style="color: orangered;">
+    </header>
+    <div class="sidebar">
+        <ul>
+            <li><button><a href="./Home.html"><span class="material-symbols-outlined">home</span>Home</a></button></li>
+            <li><button><a href="#"><span class="material-symbols-outlined">
+                shopping_cart
+                </span>Orders</a></button></li>
+            <li><button><a href="#"><span class="material-symbols-outlined">
+                person
+                </span>Dashboard</a></button></li>
+            <li><button><a href="#"><span class="material-symbols-outlined">
+                settings
+                </span>Settings</a></button></li>
+            <li><button><a href="#"><span class="material-symbols-outlined">
+                help
+                </span>Customers Help</a></button></li>
+            <li><button><a href="/logout"><span class="material-symbols-outlined">
+                logout
+                </span>Logout</a></button></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>{{.msg}}</h2>
+    </div>
+</body>
+</html>

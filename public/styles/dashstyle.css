@@ -1,0 +1,83 @@
+/* Reset default styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header styles */
+  header {
+    
+    color: #0f0101;
+    padding: 20px;
+   
+  }
+
+  header h1 {
+    font-family:'Comme', sans-serif;
+    color: rgb(38, 152, 228);
+    font-style:italic;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+/* Sidebar styles */
+.sidebar {
+    transition: 0.8s;
+    background-color:  rgb(38, 152, 228);
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    float: left;
+    display: flex;
+  }
+.sidebar span{
+    display: flex;
+    font-size: 21px;
+    
+}
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .sidebar li {
+    margin-bottom: 5px;
+  }
+.sidebar button {
+    border-radius: 5px;
+    border-color: aqua;
+    background-color: rgb(18, 115, 180);
+    width: 200px;
+    height: 50px;
+}
+  .sidebar a {
+    color: aliceblue;
+    font-family:'Comme', sans-serif;
+    font-style:italic;
+    font-size: 19px;
+    text-decoration: none;
+    
+  }
+  .sidebar a:hover {
+    border-radius: 7px;
+    transition: 2s ;
+    transition-duration: 1s;
+    font-size: 22px;
+    color: orangered;
+  }
+/* Content styles */
+.content {
+    padding: 20px;
+    margin-left: 220px;
+  }
+
+  .content h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .content p {
+    margin-bottom: 20px;
+  }
