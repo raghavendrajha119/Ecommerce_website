@@ -69,3 +69,77 @@ a:hover{
     transform: scale(1.5);
     font-size: larger;
 }
+.products{
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card{
+    box-shadow: 10px 10px;
+    border: 3px solid  rgb(11, 145, 235);
+    border-radius: 15px;
+    width:23%;
+    padding: 20px;
+    margin: 3%;
+}
+.card:hover{
+    border: 3px solid rgb(11, 145, 235);
+}
+.card img{
+    width:180px;
+    height: 180px;
+    padding: 10px;
+}
+
+.card h3{
+    font-size: 25px;
+    font-weight: 450;
+}
+.card p{
+    font-style: italic;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(205, 222, 238);
+    border-radius: 15px;
+    padding: 5px;
+}
+.card h5{
+    padding: 10px 10%;
+    font-size: 24px;
+    text-align: center;
+}
+.card button{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-30%);
+}
+.card button:hover{
+    transition: 0.3s;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 19px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

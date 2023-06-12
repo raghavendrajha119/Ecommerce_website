@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comme&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
 </head>
 <body>
@@ -28,16 +29,16 @@
         <button ><a href="/">Home</a></button>
         <button><a href="Men">Men</a></button>
         <button><a href="Women">Women</a></button>
-        {{ if .IsLoggedIn }}
-            <!-- once login the logout func pops out -->
-            <button><a href="/logout">Logout</a></button>
-        {{ else }}
-            <button><a href="/loginpg">Login</a></button>
-        {{ end }}
+        <button><a href="/loginpg">Login</a></button>
         <button><a href="/register">Register</a></button>
         <button><a href="Cart"><span class="material-symbols-outlined">
             shopping_cart_checkout
             </span></a></button> 
     </nav>
+    <div class="container" >
+        <div class="products">
+        </div>
+    </div>
+    <script src="./script/scripthome.js"></script>
 </body>
 </html>
