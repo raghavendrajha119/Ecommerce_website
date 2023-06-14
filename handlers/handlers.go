@@ -15,15 +15,7 @@ import (
 )
 
 func Home(c *fiber.Ctx) error {
-	// check if the user is logged in
-
-	isLoggedIn := false
-	cookies := c.Cookies("authToken")
-	if len(cookies) > 0 {
-		isLoggedIn = true
-	}
-
-	return c.Render("public/Home.html", map[string]interface{}{"IsLoggedIn": isLoggedIn})
+	return c.Render("./public/Home.html", map[string]interface{}{})
 }
 
 // Login route
@@ -103,7 +95,7 @@ func LoginPack(c *fiber.Ctx) error {
 		panic(err)
 	}
 
-	return c.Render("public/dashboard.html", map[string]interface{}{"msg": "Welcome to Go Shopping " + row.Name + " Continue Shopping......"})
+	return c.Render("public/dashboard.html", map[string]interface{}{"msg": row.Name})
 }
 
 // Initial user_register

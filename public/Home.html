@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Comme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comme&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     
 </head>
 <body>
@@ -20,25 +22,74 @@
             <h1 class="btn btn-centre">Go shopping </h1>
             <img src="./pic/Untitled.png" alt="img" height="80px" width="80px">
         </div>
-        
+        <div class="search">
+            <input type="search" class="search_items" placeholder="Search Products">
+            <button class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
     </header>
-    <nav class="nav_bar">
-        <button><a href="Search"><span class="material-symbols-outlined">
-            search
-            </span></a></button>
-        <button ><a href="/">Home</a></button>
-        <button><a href="Men">Men</a></button>
-        <button><a href="Women">Women</a></button>
+    <nav class="nav_bar" i>
+        <button id="Electronics">Electronics</button>
+        <button id="Men">Men</button>
+        <button id="Women">Women</button>
+        <button id="Jewelery">Jewelery</button>
         <button><a href="/loginpg">Login</a></button>
         <button><a href="/register">Register</a></button>
         <button><a href="Cart"><span class="material-symbols-outlined">
             shopping_cart_checkout
             </span></a></button> 
     </nav>
+    <div class="categories">
+        
+    </div>
     <div class="container" >
         <div class="products">
         </div>
     </div>
+    
+    <footer>
+        <div class="downbar">
+            <ul class="About">
+                <li class="footheading">ABOUT US</li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+            <ul class="Help">
+                <li class="footheading">HELP</li>
+                <li><a href="">Payment</a>s</li>
+                <li><a href="">Shipping</a></li>
+                <li><a href="">Cancellation</a></li>
+                <li><a href="">FAQ</a></li>
+            </ul>
+            <ul class="cus_policy">
+                <li class="footheading">CUSTOMER POLICY</li>
+                <li><a href="">Return Policy</a></li>
+                <li><a href="">Terms of Use</a></li>
+                <li><a href="">Security</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Grievance</a></li>
+                <li><a href="">Redressal</a></li>
+            </ul>
+            <ul class="social">
+                <li class="footheading">SOCIAL</li>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Instagram</a></li>
+            </ul>
+            <div class="vertical-line"></div>
+            <ul class="address">
+                <li class="footheading">ADDRESS:-</li>
+                <li style="margin-bottom: 5px;">51, Chandani chowk,Meditation lane,
+                    Kolkata:-725484</li>
+                <li class="footheading">TELEPHONE:-</li>
+                <li>98798700064</li>
+            </ul>
+        </div>
+    </footer>
+    <button id="scrollToTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
     <script src="./script/scripthome.js"></script>
 </body>
 </html>

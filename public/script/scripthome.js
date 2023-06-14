@@ -19,3 +19,34 @@ document.addEventListener('DOMContentLoaded', function(){
     };
     fetchProducts('https://fakestoreapi.com/products');
 });
+document.addEventListener('DOMContentLoaded', function(){
+  let categories = document.querySelector('.categories'); 
+  async function fetchcategories(url){
+      let data = await fetch (url);
+      let response = await data.json();
+      for (let i = 0; i< response.length; i++){
+          let description = response[i].description;
+          categories.innerHTML += `
+          <div class="one_cat">
+            <img src="${response[i].image}" alt="cat">
+            <p>${response[i].name}</p>
+          </div>
+      `;
+      }  
+  };
+  fetchcategories('https://api.escuelajs.co/api/v1/categories');
+});
+window.addEventListener('scroll', function() {
+    var scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (window.pageYOffset > 200) {
+      scrollToTopBtn.classList.add('show');
+    } else {
+      scrollToTopBtn.classList.remove('show');
+    }
+  });
+  
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  document.getElementById('scrollToTopBtn').addEventListener('click', scrollToTop);

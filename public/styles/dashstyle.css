@@ -6,28 +6,48 @@ body, h1, p {
 
   /* Header styles */
   header {
-    
-    color: #0f0101;
-    padding: 20px;
-   
+    padding-top: 15px;
   }
-
-  header h1 {
+  .upside_bar{
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: 0.8s;
+    background-color:  rgb(38, 152, 228);
+    width: 200px;
+    padding: 10px 15px
+  }
+.upside_bar img{
+    height: 45px;
+    width: 50px;
+    border-radius: 5px;
+  }
+.upside_bar h2{
+    padding-left: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: aliceblue;
+}
+header h1 {
     font-family:'Comme', sans-serif;
     color: rgb(38, 152, 228);
     font-style:italic;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 550;
     margin: 0;
-    text-align: center;
-  }
+    text-align: left;
+    padding-left: 5px;
+}
+
 /* Sidebar styles */
 .sidebar {
     transition: 0.8s;
     background-color:  rgb(38, 152, 228);
     width: 200px;
     height: 100vh;
-    padding: 20px;
+    padding: 15px;
     float: left;
     display: flex;
   }
@@ -46,7 +66,8 @@ body, h1, p {
     margin-bottom: 5px;
   }
 .sidebar button {
-    border-radius: 5px;
+    border-radius: 15px;
+    border-style: none;
     border-color: aqua;
     background-color: rgb(18, 115, 180);
     width: 200px;
