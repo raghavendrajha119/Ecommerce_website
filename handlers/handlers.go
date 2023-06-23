@@ -51,7 +51,7 @@ func Login(c *fiber.Ctx) error {
 	}
 	// store the token in cookies
 	c.Cookie(&fiber.Cookie{
-		Name:     "authToken",
+		Name:     "jwt",
 		Value:    t,
 		Expires:  time.Now().Add(time.Hour * 24), // Set the expiration time as desired
 		Secure:   true,                           // Set to true if using HTTPS
@@ -64,7 +64,7 @@ func Login(c *fiber.Ctx) error {
 // Logout route
 func Logout(c *fiber.Ctx) error {
 	// Clear the authentication token cookie
-	c.ClearCookie("authToken")
+	c.ClearCookie("jwt")
 	// Redirect the user to the home page or any desired page
 	return c.Redirect("/")
 }

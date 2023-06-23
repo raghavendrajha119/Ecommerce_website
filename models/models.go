@@ -21,6 +21,3 @@ type Register struct {
 	Email    string
 	Password string
 }
-type Homedata struct {
-	IsLoggedIn bool
-}

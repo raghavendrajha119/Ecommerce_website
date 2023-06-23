@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/cart.css">
+    <title>Cart</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h2>
+                Go Shopping
+            </h2>
+
+        </div>
+    </header>
+    <main>
+        <div class="cart-container">
+            <h1>Your Cart</h1>
+
+            <div class="cart-items">
+                <!-- List of cart items dynamically generated using JavaScript -->
+                
+            </div>
+            <div class="range-selector">
+                <button class="minus-button">-</button>
+                <input type="range" min="0" max="100" value="1" step="1" id="myRange">
+                <button class="plus-button">+</button>
+              </div>
+              <span id="range-value">1</span>
+              
+            <div class="cart-total">
+                <h3>Total:</h3>
+                <p>$0.00</p>
+            </div>
+
+            <button class="checkout-button">Proceed to Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+    <script src="./script/cart.js"></script>
+</body>
+</html>
