@@ -1,6 +1,32 @@
+function addToCart(productId) {
+  try {
+    fetch('http://127.0.0.1:3000/add-to-cart',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({productId})
+        })
+         .then(response => {
+          if (response.ok) {
+            alert('Product added to cart');
+          } else {
+            alert('Failed to add product to cart.');
+          }
+         })
+         .catch (error => {
+          console.error('Error:', error);
+         });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      
+    }
+
 document.addEventListener('DOMContentLoaded', function(){
     let products = document.querySelector('.products'); 
     async function fetchProducts(url){
+      try{
         let data = await fetch (url);
         let response = await data.json();
         for (let i = 0; i< response.length; i++){
@@ -12,11 +38,14 @@ document.addEventListener('DOMContentLoaded', function(){
                 <img src="${response[i].image}" alt="image" class="image">
                 <p class="description">${description.length > 20 ? description.substring(0,80).concat('...more') : description}</p>
                 <h5 class="price">$${response[i].price}</h5>
-                <button class="cart">Add to cart</button>
+                <button class="cart" onclick="addToCart(${response[i].id})">Add to cart</button>
             </div>
         `;
-        }  
-    };
+        }
+      } catch (error){
+        console.error('Error:', error);
+      }
+    }
     fetchProducts('https://fakestoreapi.com/products');
 });
 document.addEventListener('DOMContentLoaded', function(){

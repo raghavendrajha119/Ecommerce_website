@@ -28,5 +28,7 @@ func main() {
 	//logout
 	app.Get("/logout", handlers.Logout)
 	// Listen on port 3000
+	// Register routes
+	handlers.SetupRoutes(app)
 	app.Listen(":3000")
 }

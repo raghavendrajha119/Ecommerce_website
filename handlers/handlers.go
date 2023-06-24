@@ -144,3 +144,45 @@ func RegisterSuccessful(c *fiber.Ctx) error {
 	return c.Render("public/registrationsuccessful.html", map[string]interface{}{
 		"msg": "Welcome to Go Shopping Continue Shopping......"})
 }
+
+// Add to Cart
+func AddToCart(c *fiber.Ctx) error {
+	request := new(models.AddToCartRequest)
+	if err := c.BodyParser(request); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	err := storeProductInCart(request.ProductID)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to add product to cart"})
+	}
+
+	return c.SendStatus(fiber.StatusOK)
+}
+func storeProductInCart(productID int) error {
+	const (
+		host     = "localhost"
+		port     = 5432
+		user     = "postgres"
+		password = "Raghav@123"
+		dbname   = "lib"
+	)
+	psqlconnect := fmt.Sprintf("host= %s port = %d user= %s password= %s dbname= %s sslmode=disable", host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlconnect)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	// Execute the SQL query to store the product ID
+	_, err = db.Exec("INSERT INTO product (product_id) VALUES ($1)", productID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+func SetupRoutes(app *fiber.App) {
+	app.Post("/add-to-cart", AddToCart)
+	// Add other routes here...
+}

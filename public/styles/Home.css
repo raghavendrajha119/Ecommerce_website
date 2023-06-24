@@ -149,15 +149,16 @@ header{
     height: max-content;
 }
 .card:hover{
-    transition: 0.2s ease-in-out;
+    transition: 0.5s ease-in-out;
     border: none;
-    background-color: #d3d6e0;
+    background-color: #dfe0e4;    
 }
 .card img{
     width:130px;
     height: 130px;
     padding: 10px;
-    margin-left:20%
+    margin-left:20%;
+    mix-blend-mode: color;
 }
 
 .card h3{
@@ -206,6 +207,9 @@ header{
     font-size: 19px;
     margin: 4px 2px;
     cursor: pointer;
+}
+.card button:active{
+    background-color: #316d33;
 }
 footer{
     background-color: #afeff3;
@@ -264,4 +268,7 @@ footer{
   
 #scrollToTopBtn.show {
     opacity: 1;
+}
+#scrollToTopBtn::after{
+    background-color: rgb(12, 96, 151);
 }

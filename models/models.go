@@ -21,3 +21,6 @@ type Register struct {
 	Email    string
 	Password string
 }
+type AddToCartRequest struct {
+	ProductID int `json:"productId"`
+}
