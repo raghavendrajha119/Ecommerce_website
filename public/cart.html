@@ -4,35 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/cart.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Cart</title>
 </head>
 <body>
-    <header>
+    <header class="nav">
         <div class="logo">
-            <h2>
+            <h2 class="btn btn-centre">
                 Go Shopping
             </h2>
+            <img src="./pic/Untitled.png" alt="img">
 
+        </div>
+        <div>
+            <a href="./Home.html"><span class="material-symbols-outlined">
+                home
+            </span></a>
+            <a href="./dashboard.html"><span class="material-symbols-outlined">
+                person
+            </span></a>
         </div>
     </header>
     <main>
         <div class="cart-container">
             <h1>Your Cart</h1>
+            
 
             <div class="cart-items">
                 <!-- List of cart items dynamically generated using JavaScript -->
                 
             </div>
-            <div class="range-selector">
-                <button class="minus-button">-</button>
-                <input type="range" min="0" max="100" value="1" step="1" id="myRange">
-                <button class="plus-button">+</button>
-              </div>
-              <span id="range-value">1</span>
               
             <div class="cart-total">
                 <h3>Total:</h3>
-                <p>$0.00</p>
+                <p id="totalAmount">$0.00</p>
             </div>
 
             <button class="checkout-button">Proceed to Checkout</button>

@@ -182,7 +182,45 @@ func storeProductInCart(productID int) error {
 
 	return nil
 }
+
+func GetCartProducts(c *fiber.Ctx) error {
+	// Fetch the product IDs from the database
+	// You can modify this code based on your database structure and query
+	const (
+		host     = "localhost"
+		port     = 5432
+		user     = "postgres"
+		password = "Raghav@123"
+		dbname   = "lib"
+	)
+	psqlconnect := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlconnect)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	rows, err := db.Query("SELECT product_id FROM product")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	var productIDs []int
+	for rows.Next() {
+		var productID int
+		err := rows.Scan(&productID)
+		if err != nil {
+			return err
+		}
+		productIDs = append(productIDs, productID)
+	}
+
+	// Return the product IDs as JSON response
+	return c.JSON(fiber.Map{"productIDs": productIDs})
+}
 func SetupRoutes(app *fiber.App) {
 	app.Post("/add-to-cart", AddToCart)
-	// Add other routes here...
+	app.Get("/cart-products", GetCartProducts)
+
 }

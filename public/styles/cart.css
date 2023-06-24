@@ -13,10 +13,21 @@ body {
   /* Header styles */
 header {
     background-color: #ffffff;
-    padding: 20px;
+    padding-left: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-  
+.nav{
+    display: flex;
+    justify-content: space-between;
+ } 
+ .nav span{
+    padding: 15px 10px;
+    font-size: 40px;
+    color: #2a77b6;
+ }
+ .nav span:hover{
+    color: #131111;
+ }
 .logo h2 {
     font-size: 30px;
     font-family: sans-serif;
@@ -24,7 +35,15 @@ header {
     font-style: italic;
     color: #358c9b;
 }
-  
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}  
+.logo img{
+    height: 80px;
+    width: 80px
+}
   /* Main styles */
 main {
     padding: 20px;
@@ -35,38 +54,62 @@ main {
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-  
+.btn::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.175rem;
+    background-color: #ff7846;
+    left: 0;
+    top: 80px;
+
+} 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
     margin-bottom: 20px;
 }
   
 .cart-items {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    display: grid;
+    gap: 7px;
+    
 }
   
 .cart-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 5px;
 }
   
 .cart-item img {
-    width: 80px;
-    height: 80px;
+    width: 125px;
+    height: 100px;
     margin-right: 10px;
+    mix-blend-mode: multiply;
+    padding: 5px;
 }
   
-.cart-item-name {
-    font-size: 16px;
-    color: #333333;
+.name {
+    font-size: 17px;
+    color: #131111;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
 }
   
-  .cart-item-price {
-    font-size: 14px;
-    color: #777777;
+.price {
+    font-size: 18px;
+    color: #45a6b3;
+    padding-right: 5px;
 }
-  
+.quantity{
+    font-size: 13px;
+} 
   .cart-total {
     display: flex;
     align-items: center;
@@ -95,11 +138,11 @@ h1 {
     display: block;
     width: 100%;
     padding: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    background-color: #ff7846;
+    background-color: #b64f2a;
     color: #ffffff;
     border: none;
     border-radius: 5px;
