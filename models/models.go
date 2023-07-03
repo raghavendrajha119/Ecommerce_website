@@ -23,4 +23,5 @@ type Register struct {
 }
 type AddToCartRequest struct {
 	ProductID int `json:"productId"`
+	UserID    int `json:"userId"`
 }

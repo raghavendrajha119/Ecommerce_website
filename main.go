@@ -29,6 +29,7 @@ func main() {
 	app.Get("/logout", handlers.Logout)
 	// Listen on port 3000
 	// Register routes
-	handlers.SetupRoutes(app)
+	app.Post("/add-to-cart", handlers.AddToCart)
+	app.Get("/cart-products", handlers.GetCartProducts)
 	app.Listen(":3000")
 }
