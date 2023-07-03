@@ -25,3 +25,13 @@ type AddToCartRequest struct {
 	ProductID int `json:"productId"`
 	UserID    int `json:"userId"`
 }
+type Customer struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+type AdminLoginRequest struct {
+	ID       int    `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}

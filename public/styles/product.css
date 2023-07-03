@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    padding: 20px;
+    font-family: 'Arial', Times, serif;
+    background-color: rgb(123, 223, 223);
+} 
+.btn-centre::after {
+    transform: scale(0,1);
+    transition: transform 0.3s ease;
+}
+.btn-centre:hover::after{
+    transform: scale(1,1);
+}
+.btn::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.175rem;
+    background-color: #ff7846;
+    left: 0;
+    top: 75px;
+
+}
+#product-form {
+    background-color: #b7d6b8;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+}
+#product-form input{
+    padding: 10px;
+    border-radius: 5px;
+}
+#product-form h2{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+}
+.product {
+    background-color: #ececec;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 10px;
+    margin: 10px;
+}
+  
+.product h2 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.product p {
+    margin-bottom: 0;
+}
+  
+.button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-color: #48a145;
+    transition: 0.5s;
+}
+#edit-form {
+    background-color: #b7d6b8;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+}
+  
+#edit-form input {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

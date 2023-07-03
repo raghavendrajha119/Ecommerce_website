@@ -152,14 +152,14 @@ func AddToCart(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 	}
 
-	err := storeProductInCart(request.UserID, request.ProductID)
+	err := storeProductInCart(request.ProductID)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to add product to cart"})
 	}
 
 	return c.SendStatus(fiber.StatusOK)
 }
-func storeProductInCart(userID, productID int) error {
+func storeProductInCart(productID int) error {
 	const (
 		host     = "localhost"
 		port     = 5432
@@ -175,7 +175,7 @@ func storeProductInCart(userID, productID int) error {
 	defer db.Close()
 
 	// Execute the SQL query to store the product ID
-	_, err = db.Exec("INSERT INTO product (user_id, product_id) VALUES ($1, $2)", userID, productID)
+	_, err = db.Exec("INSERT INTO product (product_id) VALUES ($1)", productID)
 	if err != nil {
 		return err
 	}
