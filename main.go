@@ -29,6 +29,15 @@ func main() {
 	app.Get("/logout", handlers.Logout)
 	// Listen on port 3000
 	// Register routes
+	//admin routes
+	app.Get("/admin/login", handlers.AdminLoginPage)
+	app.Post("/admin/login", handlers.AdminLogin) // Admin login route
+	// Middleware to protect admin routes
+	app.Get("/admin", handlers.AdminPage)               // Admin page route
+	app.Get("/admin/orders", handlers.OrdersPage)       // Admin orders page route
+	app.Get("/admin/products", handlers.ProductsPage)   // Admin products page route
+	app.Get("/admin/customers", handlers.CustomersPage) // Admin customers page route
+	//cart routes
 	app.Post("/add-to-cart", handlers.AddToCart)
 	app.Get("/cart-products", handlers.GetCartProducts)
 	app.Listen(":3000")

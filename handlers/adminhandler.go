@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"database/sql"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,6 +10,10 @@ import (
 	"github.com/raghavendrajha119/Ecommerce_website/middlewares"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 )
+
+func AdminLoginPage(c *fiber.Ctx) error {
+	return c.Render("public/adminlogin.html", map[string]interface{}{})
+}
 
 // AdminLogin handles the admin login route
 func AdminLogin(c *fiber.Ctx) error {
@@ -93,14 +96,4 @@ func CustomersPage(c *fiber.Ctx) error {
 	// You can retrieve customer data from the database and pass it to the template
 
 	return c.Render("public/customers.html", map[string]interface{}{})
-}
-
-// InitializeAdminRoutes initializes the admin routes
-func InitializeAdminRoutes(app *fiber.App, db *sql.DB) {
-	adminGroup := app.Group("/admin", AdminProtected)
-
-	adminGroup.Get("/", AdminPage)
-	adminGroup.Get("/orders", OrdersPage)
-	adminGroup.Get("/products", ProductsPage)
-	adminGroup.Get("/customers", CustomersPage)
 }
