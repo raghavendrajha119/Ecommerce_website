@@ -16,23 +16,21 @@ func main() {
 	// Create a Login route
 	app.Static("/", "./public")
 	app.Get("/", handlers.Home)
-	app.Post("/login", handlers.Login)
+
 	// Create a protected route
 	app.Get("/protected", jwt, handlers.Protected)
 	//registration page
+	// Register routes
 	app.Get("/register", handlers.Register)
 	app.Post("/register", handlers.RegisterPost)
 	app.Get("/registered", handlers.RegisterSuccessful)
-	app.Get("/loginpg", handlers.LoginPg)
-	app.Post("/loginpg", handlers.LoginPack)
+	app.Get("/login", handlers.LoginPg)
+	app.Post("/login", handlers.Login)
 	//logout
 	app.Get("/logout", handlers.Logout)
-	// Listen on port 3000
-	// Register routes
 	//admin routes
 	app.Get("/admin/login", handlers.AdminLoginPage)
-	app.Post("/admin/login", handlers.AdminLogin) // Admin login route
-	// Middleware to protect admin routes
+	app.Post("/admin/login", handlers.AdminLogin)       // Admin login route
 	app.Get("/admin", handlers.AdminPage)               // Admin page route
 	app.Get("/admin/orders", handlers.OrdersPage)       // Admin orders page route
 	app.Get("/admin/products", handlers.ProductsPage)   // Admin products page route
@@ -40,5 +38,6 @@ func main() {
 	//cart routes
 	app.Post("/add-to-cart", handlers.AddToCart)
 	app.Get("/cart-products", handlers.GetCartProducts)
+	// Listen on port 3000
 	app.Listen(":3000")
 }

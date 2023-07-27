@@ -1,21 +1,19 @@
-// Update the URL of the fetch request based on your server configuration
 fetch('/cart-products')
   .then(response => response.json())
   .then(data => {
-    const productIDs = data.productIDs;
-    // count for the repeated products
+    const productIDs = data.productIDs; // get productids contain data from my golang cart function
     const productQuantity = {};
-    const uniqueProductIDs = [...new Set(productIDs)];
+    const uniqueProductIDs = [...new Set(productIDs)]; // count for the repeated products
     productIDs.forEach(productID => {
       productQuantity[productID] = productQuantity[productID] + 1 || 1;
     });
-    // Use the product IDs to fetch the product details from the FakeStore API
+    // Using the product IDs to fetch the product details from the FakeStore API
     Promise.all(uniqueProductIDs.map(productID =>
       fetch(`https://fakestoreapi.com/products/${productID}`)
         .then(response => response.json())
     ))
       .then(products => {
-        // Display the products in the cart page
+        // Displaying the products in the cart page
         const cartItemsContainer = document.querySelector('.cart-items');
         let totalPrice = 0;
         products.forEach(product => {
@@ -26,7 +24,6 @@ fetch('/cart-products')
               <h3 class="name">${product.title}</h3>
               <p class="quantity">Quantity: ${productQuantity[product.id]}</p>
               <p class="price">$${(product.price).toFixed(2)}</p>
-             
             </div>
           `;
           cartItemsContainer.innerHTML += productHTML;

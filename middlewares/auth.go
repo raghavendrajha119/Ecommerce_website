@@ -1,5 +1,6 @@
 package middlewares
 
+// Middlewares is created basically to manage the data from users like authentication and other functionalities
 import (
 	"fmt"
 
@@ -9,7 +10,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// Middleware JWT function
+// Middleware JWT function checks for valid jwt token
 func NewAuthMiddleware(secret string) fiber.Handler {
 	return jwtware.New(jwtware.Config{
 		SigningKey: []byte(secret),
@@ -25,7 +26,7 @@ func HashPassword(password string) (string, error) {
 }
 
 func ComparePasswords(hashedPwd, plainPwd string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashedPwd), []byte(plainPwd))
+	err := bcrypt.CompareHashAndPassword([]byte(plainPwd), []byte(hashedPwd))
 	return err == nil
 }
 
