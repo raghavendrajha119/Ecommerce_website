@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comme&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="icon" type="image/x-icon" href="./pic/favicon.ico">
     
 </head>
 <body>
@@ -23,20 +23,22 @@
             <img src="./pic/Untitled.png" alt="img" height="80px" width="80px">
         </div>
         <div class="search">
-            <input type="search" class="search_items" placeholder="Search Products">
+            <input type="search" class="search_items" id="search" placeholder="Search Products">
             <button class="search-button">
                 <i class="fas fa-search"></i>
             </button>
         </div>
     </header>
-    <nav class="nav_bar" i>
+    <nav class="nav_bar">
         <button id="Electronics">Electronics</button>
         <button id="Men">Men</button>
         <button id="Women">Women</button>
         <button id="Jewelery">Jewelery</button>
-        <button><a href="/login">Login</a></button>
-        <button><a href="/register">Register</a></button>
-        <button><a href="cart.html"><span class="material-symbols-outlined">
+        <button id="login"><a href="/login">Login</a></button>
+        <button id="register"><a href="/register">Register</a></button>
+        <button id="dashboard"><a href="/dashboard">Dashboard</a></button>
+        <button id="logout"><a href="/logout">Logout</a></button>
+        <button id="cart" ><a href="./cart.html"><span class="material-symbols-outlined">
             shopping_cart_checkout
             </span></a></button> 
     </nav>
