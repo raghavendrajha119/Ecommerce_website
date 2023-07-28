@@ -128,14 +128,7 @@ header{
     font-size: 15px;
 }
 .products{
-    
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.container{
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
