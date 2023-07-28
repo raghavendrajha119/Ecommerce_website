@@ -22,8 +22,28 @@ func Home(c *fiber.Ctx) error {
 
 // Initial Login page
 func LoginPg(c *fiber.Ctx) error {
-
 	return c.Render("public/login.html", map[string]interface{}{"h1": "Log in here...."})
+}
+
+// Dashboard page
+func Dashboard(c *fiber.Ctx) error {
+	if tokenCookie := c.Cookies("jwt"); tokenCookie != "" {
+		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
+			return []byte(config.Secret), nil
+		})
+		if err == nil && token.Valid {
+			claims := token.Claims.(jtoken.MapClaims)
+			userName, okName := claims["name"].(string)
+			userEmail, okEmail := claims["email"].(string)
+			if okName && okEmail {
+				return c.Render("public/dashboard.html", map[string]interface{}{
+					"msg":   userName,
+					"email": userEmail,
+				})
+			}
+		}
+	}
+	return c.Redirect("/login")
 }
 
 // Login route
@@ -63,7 +83,13 @@ func Login(c *fiber.Ctx) error {
 		Expires: time.Now().Add(time.Hour * 24),
 	})
 	// Redirect the user to the desired page after successful login
-	return c.Render("public/dashboard.html", map[string]interface{}{"msg": user.Name})
+	if user.Name != "" {
+		return c.Redirect("/dashboard")
+	} else {
+		return c.JSON(fiber.Map{
+			"msg": "Invalid",
+		})
+	}
 }
 
 // Logout route

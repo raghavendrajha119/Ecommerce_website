@@ -26,6 +26,7 @@ func main() {
 	app.Get("/registered", handlers.RegisterSuccessful)
 	app.Get("/login", handlers.LoginPg)
 	app.Post("/login", handlers.Login)
+	app.Get("/dashboard", handlers.Dashboard)
 	//logout
 	app.Get("/logout", handlers.Logout)
 	//admin routes
