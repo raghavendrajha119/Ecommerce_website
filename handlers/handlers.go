@@ -225,5 +225,7 @@ func GetCartProducts(c *fiber.Ctx) error {
 		}
 		productIDs = append(productIDs, productID)
 	}
+	fmt.Println(c.JSON(fiber.Map{"productIDs": productIDs}))
 	return c.JSON(fiber.Map{"productIDs": productIDs})
+
 }

@@ -123,28 +123,22 @@ header{
     transition-duration: 1s;
     text-decoration: none;
 }
-.nav_bar button:hover{
-    transform: scale(1.2);
-    font-size: 15px;
-}
 .products{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .card{
-
-    border: none;
-    border-radius: 10px;
+    border: 0.02rem solid rgb(66, 66, 66);
+    border-radius: 0;
     width:20%;
     padding: 5px;
-    margin: 2% 1%;
-    height: max-content;
+    margin: 2% 0.5%;
+    height: 50vh;
 }
 .card:hover{
-    transition: 0.5s ease-in-out;
-    border: none;
-    background-color: #dfe0e4;    
+    transition: 0.3s ease-in-out;
+    background-color: #f1f2f3;    
 }
 .card img{
     width:130px;
@@ -181,14 +175,14 @@ header{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 15px 2px;
     cursor: pointer;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-30%);
 }
 .card button:hover{
-    transition: 0.3s;
+    transition: 0.5s ease-in-out;
     background-color: #4CAF50;
     border: none;
     border-radius: 15px;
@@ -197,7 +191,7 @@ header{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 19px;
+    font-size: 18px;
     margin: 4px 2px;
     cursor: pointer;
 }

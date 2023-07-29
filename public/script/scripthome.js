@@ -1,28 +1,3 @@
-function addToCart(productId) {
-  try {
-    fetch('http://127.0.0.1:3000/add-to-cart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ productId })
-    })
-      .then(response => {
-        if (response.ok) {
-          alert('Product added to cart');
-        } else {
-          alert('Failed to add product to cart.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  } catch (error) {
-    console.error('Error:', error);
-  }
-
-}
-
 document.addEventListener('DOMContentLoaded', function () {
   let products = document.querySelector('.products');
   async function fetchProducts(url) {
@@ -65,9 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
   };
   fetchcategories('https://api.escuelajs.co/api/v1/categories');
 });
+//scroll to top function for UI
 window.addEventListener('scroll', function () {
   var scrollToTopBtn = document.getElementById('scrollToTopBtn');
-  if (window.pageYOffset > 200) {
+  if (window.scrollY > 200) {
     scrollToTopBtn.classList.add('show');
   } else {
     scrollToTopBtn.classList.remove('show');
@@ -79,6 +55,31 @@ function scrollToTop() {
 }
 
 document.getElementById('scrollToTopBtn').addEventListener('click', scrollToTop);
+//Emplementing add to cart operation
+function addToCart(productId) {
+  try {
+    fetch('http://127.0.0.1:3000/add-to-cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId })
+    })
+      .then(response => {
+        if (response.ok) {
+          alert('Product added to cart');
+        } else {
+          alert('Failed to add product to cart.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  } catch (error) {
+    console.error('Error:', error);
+  }
+
+}
 // cookies handling
 let cookies = document.cookie;
 let cookie = cookies.split("=");
@@ -140,10 +141,18 @@ search.addEventListener("keyup", (event) => {
   }
   fetchProducts('https://fakestoreapi.com/products');
 });
+function makeallcolorless(){
+  let categories = document.getElementsByClassName('Cat');
+for (const category of categories){
+  category.style.color = "white";
+}
+}
 // emplementing categories
 let categories = document.getElementsByClassName('Cat');
 for (const category of categories){
   category.addEventListener('click',()=>{
+    makeallcolorless();
+    category.style.color = "#ff7846";
     let products = document.querySelector('.products');
     products.innerHTML = '';
     async function fetchProducts(url) {
