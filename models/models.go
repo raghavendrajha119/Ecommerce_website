@@ -1,36 +1,37 @@
 package models
 
+import "gorm.io/gorm"
+
 type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-type LoginResponse struct {
-	Token string `json:"token"`
-}
-
 type User struct {
-	ID       int
-	Email    string
-	Password string
+	gorm.Model
 	Name     string
+	Email    string `gorm:"unique"`
+	Password string
 }
 type Register struct {
 	Name     string
 	Email    string
 	Password string
 }
-type AddToCartRequest struct {
-	ProductID int `json:"productId"`
-	UserID    int `json:"userId"`
+type Product struct {
+	gorm.Model
+	Title       string
+	Price       float64
+	Description string
+	Category    string
+	Rating      struct {
+		Rate  float64
+		Count int
+	}
 }
-type Customer struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-type AdminLoginRequest struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+
+type ProductCart struct {
+	gorm.Model
+	ProductID int
+	UserID    int
 }

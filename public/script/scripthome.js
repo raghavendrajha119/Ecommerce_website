@@ -133,6 +133,8 @@ search.addEventListener("keyup", (event) => {
         `;
           }
           ids.push(response[i].id);
+        } else {
+          console.log("no match")
         }
       }
     } catch (error) {

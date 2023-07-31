@@ -10,7 +10,7 @@ import (
 func main() {
 	app := fiber.New()
 	jwt := middlewares.NewAuthMiddleware(config.Secret)
-	// Default route
+	// Default routeaaaaaaaaa
 	app.Static("/", "./public")
 	app.Get("/", handlers.Home)
 	// protected route
