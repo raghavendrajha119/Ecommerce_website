@@ -1,6 +1,8 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type LoginRequest struct {
 	Email    string `json:"email"`
@@ -19,19 +21,14 @@ type Register struct {
 	Password string
 }
 type Product struct {
-	gorm.Model
 	Title       string
 	Price       float64
 	Description string
 	Category    string
-	Rating      struct {
-		Rate  float64
-		Count int
-	}
 }
-
-type ProductCart struct {
+type Cart struct {
 	gorm.Model
-	ProductID int
-	UserID    int
+	UserID    uint
+	ProductID uint
+	Quantity  int
 }

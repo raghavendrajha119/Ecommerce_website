@@ -5,49 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go_shopping</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="./styles/Home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comme&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comme&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <link rel="stylesheet" href="./styles/Home.css">
     <link rel="icon" type="image/x-icon" href="./pic/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
 </head>
 <body>
     <header>
         <div class="heading">
-            <h1 class="btn btn-centre">Go shopping </h1>
+            <h1>Go shopping </h1>
             <img src="./pic/Untitled.png" alt="img" height="80px" width="80px">
         </div>
         <div class="search">
             <input type="search" class="search_items" id="search" placeholder="Search Products">
             <button class="search-button">
-                <i class="fas fa-search"></i>
+                <span class="material-symbols-outlined">
+                    search
+                    </span>
             </button>
         </div>
     </header>
-    <nav class="nav_bar">
-        <button class="Cat">Electronics</button>
-        <button class="Cat">Men</button>
-        <button class="Cat">Women</button>
-        <button class="Cat">Jewelery</button>
-        <button id="login"><a href="/login">Login</a></button>
-        <button id="register"><a href="/register">Register</a></button>
-        <button id="dashboard"><a href="/dashboard">Dashboard</a></button>
-        <button id="logout"><a href="/logout">Logout</a></button>
-        <button id="cart" ><a href="./cart.html"><span class="material-symbols-outlined">
-            shopping_cart_checkout
-            </span></a></button> 
-    </nav>
+    <nav class="navbar">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="/login" id="login">Login</a></li>
+          <li><a href="/logout" id="logout">Logout</a></li>
+          <li><a href="/register" id="register">Register</a></li>
+          <li><a href="/dashboard" id="dashboard">Profile</a></li>
+          <li><a href="./cart.html" id="cart">Cart</a></li>
+        </ul>
+        <i class="fa fa-bars" id="menu-icon" onclick="toggleMenu()"></i>
+      </nav>
     <div class="categories">
         
     </div>
     <div class="container" >
-        <div class="products">
-        </div>
+        
+    </div>
     </div>
     
     <footer>
@@ -89,9 +87,12 @@
         </div>
     </footer>
     <button id="scrollToTopBtn">
-        <i class="fas fa-arrow-up"></i>
+        <span class="material-symbols-outlined">
+            arrow_upward
+            </span>
     </button>
     
     <script src="./script/scripthome.js"></script>
+    <script src="./script/cart.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ import (
 func main() {
 	app := fiber.New()
 	jwt := middlewares.NewAuthMiddleware(config.Secret)
-	// Default routeaaaaaaaaa
+	// Default route
 	app.Static("/", "./public")
 	app.Get("/", handlers.Home)
 	// protected route
@@ -34,7 +34,9 @@ func main() {
 	app.Get("/admin/customers", handlers.CustomersPage)
 	//cart routes
 	app.Post("/add-to-cart", handlers.AddToCart)
-	app.Get("/cart-products", handlers.GetCartProducts)
+	// app.Get("/cart-products", handlers.GetCartProducts)
+	//product route
+	app.Get("/products", handlers.ProductHandler)
 	// Listen on port 3000
 	app.Listen(":3000")
 }

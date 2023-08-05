@@ -52,5 +52,31 @@ func OpenDBUser() (*gorm.DB, error) {
 }
 func OpenDB() (*gorm.DB, error) {
 	dsn := "host=localhost user=postgres password=Raghav@123 dbname=lib port=5432 sslmode=disable"
-	return gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+	err = db.AutoMigrate(&models.User{}, &models.Cart{})
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
+}
+func AddToCart(userID uint, productID uint) error {
+	db, err := OpenDB()
+	if err != nil {
+		return err
+	}
+
+	cartItem := models.Cart{
+		UserID:    userID,
+		ProductID: productID,
+		Quantity:  1, // You can change this quantity as required.
+	}
+
+	if err := db.Create(&cartItem).Error; err != nil {
+		return err
+	}
+
+	return nil
 }

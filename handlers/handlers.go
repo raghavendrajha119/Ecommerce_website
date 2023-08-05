@@ -15,7 +15,15 @@ import (
 
 // Home page
 func Home(c *fiber.Ctx) error {
-	return c.Render("./public/Home.html", map[string]interface{}{})
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		panic(err)
+	}
+	var products []models.Product
+	if err := db.Find(&products).Error; err != nil {
+		return err
+	}
+	return c.JSON(products)
 }
 
 // Initial Login page
@@ -146,7 +154,7 @@ func RegisterSuccessful(c *fiber.Ctx) error {
 	return c.Render("public/registrationsuccessful.html", map[string]interface{}{
 		"msg": "Welcome to Go Shopping Continue Shopping......"})
 }
-func getUserIDFromJWT(c *fiber.Ctx) int {
+func getUserIDFromJWT(c *fiber.Ctx) uint {
 	tokenCookie := c.Cookies("jwt")
 	if tokenCookie != "" {
 		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
@@ -154,57 +162,29 @@ func getUserIDFromJWT(c *fiber.Ctx) int {
 		})
 		if err == nil && token.Valid {
 			claims := token.Claims.(jtoken.MapClaims)
-			if userID, ok := claims["id"].(float64); ok {
-				return int(userID)
+			if userID, ok := claims["ID"].(float64); ok {
+				return uint(userID)
 			}
 		}
 	}
 	return 0
 }
 
-// Add to Cart
 func AddToCart(c *fiber.Ctx) error {
-	request := new(models.ProductCart)
-	if err := c.BodyParser(request); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
-	}
 	userID := getUserIDFromJWT(c)
-	err := storeProductInCart(userID, request.ProductID)
-	if err != nil {
+
+	// Parse the product ID from the request body
+	request := struct {
+		ProductID uint `json:"productId"`
+	}{}
+	if err := c.BodyParser(&request); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
+	}
+
+	// Call the AddToCart function to save the product in the cart
+	if err := middlewares.AddToCart(userID, request.ProductID); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to add product to cart"})
 	}
 
 	return c.SendStatus(fiber.StatusOK)
-}
-func storeProductInCart(userID, productID int) error {
-	db, err := middlewares.OpenDB()
-	if err != nil {
-		panic(err)
-	}
-	productCart := models.ProductCart{
-		UserID:    userID,
-		ProductID: productID,
-	}
-	if err := db.Create(&productCart).Error; err != nil {
-		return err
-	}
-	return nil
-}
-
-func GetCartProducts(c *fiber.Ctx) error {
-	db, err := middlewares.OpenDB()
-	if err != nil {
-		panic(err)
-	}
-	var productCarts []models.ProductCart
-	if err := db.Find(&productCarts).Error; err != nil {
-		panic(err)
-	}
-	var productIDs []int
-	for _, pc := range productCarts {
-		productIDs = append(productIDs, pc.ProductID)
-	}
-
-	return c.JSON(fiber.Map{"productIDs": productIDs})
-
 }
