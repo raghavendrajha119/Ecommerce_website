@@ -103,7 +103,7 @@ func Logout(c *fiber.Ctx) error {
 	// Clearing the authentication token cookie
 	c.ClearCookie("jwt")
 	// Redirect the user to the home page
-	return c.Redirect("/")
+	return c.Redirect("Home.html")
 }
 
 // Protected route
@@ -124,7 +124,7 @@ func Register(c *fiber.Ctx) error {
 
 // would add the data of user inside the database
 func RegisterPost(c *fiber.Ctx) error {
-	db, err := middlewares.OpenDBUser()
+	db, err := middlewares.OpenDB()
 	if err != nil {
 		panic(err)
 	}
@@ -144,47 +144,30 @@ func RegisterPost(c *fiber.Ctx) error {
 	if err := db.Create(&users).Error; err != nil {
 		panic(err)
 	}
-	c.Redirect("/registered")
-	return nil
-}
+	// Create the JWT token for the newly registered user (similar to the Login function)
+	day := time.Hour * 24
+	claims := jtoken.MapClaims{
+		"ID":    users.ID,
+		"email": users.Email,
+		"name":  users.Name,
+		"exp":   time.Now().Add(day * 1).Unix(),
+	}
 
-// After successful Registration
-func RegisterSuccessful(c *fiber.Ctx) error {
-
-	return c.Render("public/registrationsuccessful.html", map[string]interface{}{
-		"msg": "Welcome to Go Shopping Continue Shopping......"})
-}
-func getUserIDFromJWT(c *fiber.Ctx) uint {
-	tokenCookie := c.Cookies("jwt")
-	if tokenCookie != "" {
-		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
-			return []byte(config.Secret), nil
+	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, claims)
+	t, err := token.SignedString([]byte(config.Secret))
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
 		})
-		if err == nil && token.Valid {
-			claims := token.Claims.(jtoken.MapClaims)
-			if userID, ok := claims["ID"].(float64); ok {
-				return uint(userID)
-			}
-		}
-	}
-	return 0
-}
-
-func AddToCart(c *fiber.Ctx) error {
-	userID := getUserIDFromJWT(c)
-
-	// Parse the product ID from the request body
-	request := struct {
-		ProductID uint `json:"productId"`
-	}{}
-	if err := c.BodyParser(&request); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
 	}
 
-	// Call the AddToCart function to save the product in the cart
-	if err := middlewares.AddToCart(userID, request.ProductID); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to add product to cart"})
-	}
+	// Storing the token in cookies
+	c.Cookie(&fiber.Cookie{
+		Name:    "jwt",
+		Value:   t,
+		Expires: time.Now().Add(time.Hour * 24),
+	})
 
-	return c.SendStatus(fiber.StatusOK)
+	// Redirect the user to the dashboard page after successful registration
+	return c.Redirect("/dashboard")
 }

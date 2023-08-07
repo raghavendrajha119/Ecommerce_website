@@ -1,7 +1,29 @@
+function seedetails(productId){
+  window.location.href = `/product.html?id=${productId}`;
+}
+function addToCart(productId){
+  console.log(productId);
+  fetch('/add-to-cart',{
+    method: 'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify({ productId:productId })
+  })
+  .then(response => {
+    if (!response.ok){
+      throw new Error('Failed to add item to cart.');
+    }
+  })
+  .catch (error => {
+    console.error('Error adding item to cart:',error);
+  });
+}
 function fetchproducts() {
   fetch('/')
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       const productContainer = document.querySelector('.container');
       data.forEach(product => {
         const card = document.createElement('div');
@@ -13,11 +35,16 @@ function fetchproducts() {
         `;
         const prodDiv = document.createElement('div');
         prodDiv.classList.add('details');
+        console.log(product.ID);
         prodDiv.innerHTML = `
             <h3>${product.Title}</h3>
             <p class="cat">${product.Category}</p>
             <h5>INR ${product.Price}</h5>
-            <button class="addtocart" type="submit"  onclick="addToCart(${product.id})">Add to Bag</button> 
+            <button class="seedetails" type="submit" onclick="seedetails('${product.ID}')">Details</button>
+            <div class="buttons">
+              <button class="addtocart" type="submit"  onclick="addToCart(${product.ID})">Add to Bag</button>
+              <button class="buynow" type="submit">Buy Now</button>
+            </div>
         `;
         card.appendChild(prodImg);
         card.appendChild(prodDiv);
@@ -45,37 +72,10 @@ function fetchcat() {
                 <p>${category}</p>
               </div>
               `;
-
       });
-
     });
 }
 fetchcat();
-//Emplementing add to cart operation
-function addToCart(productId) {
-  try {
-    fetch('http://127.0.0.1:3000/add-to-cart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ productId })
-    })
-      .then(response => {
-        if (response.ok) {
-          alert('Product added to cart');
-        } else {
-          alert('Failed to add product to cart.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  } catch (error) {
-    console.error('Error:', error);
-  }
-
-}
 // cookies handling
 let cookies = document.cookie;
 let cookie = cookies.split("=");

@@ -12,7 +12,7 @@ import (
 
 func FindByCredentials(email, password string) (*models.User, error) {
 	//connecting with database
-	db, err := middlewares.OpenDBUser()
+	db, err := middlewares.OpenDB()
 	if err != nil {
 		panic(err)
 	}

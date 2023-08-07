@@ -11,9 +11,10 @@ func ProductHandler(c *fiber.Ctx) error {
 	if err != nil {
 		panic(err)
 	}
-	var products []models.Product
-	if err := db.Find(&products).Error; err != nil {
+	productId := c.Query("id")
+	var product models.Product
+	if err := db.Find(&product, productId).Error; err != nil {
 		return err
 	}
-	return c.JSON(products)
+	return c.JSON(product)
 }

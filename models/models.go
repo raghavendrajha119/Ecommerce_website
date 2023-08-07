@@ -21,6 +21,8 @@ type Register struct {
 	Password string
 }
 type Product struct {
+	gorm.Model
+	ID          uint
 	Title       string
 	Price       float64
 	Description string

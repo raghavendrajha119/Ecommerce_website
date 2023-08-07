@@ -3,6 +3,7 @@ package middlewares
 // Middlewares is created basically to manage the data from users like authentication and other functionalities
 import (
 	"fmt"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
@@ -41,42 +42,18 @@ func CheckJWT(c *fiber.Ctx, cookieName string) error {
 }
 
 // gorm connection syntax
-func OpenDBUser() (*gorm.DB, error) {
-	dsn := "host=localhost user=postgres password=Raghav@123 dbname=lib port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
-	db.AutoMigrate(&models.User{})
-	return db, nil
-}
 func OpenDB() (*gorm.DB, error) {
-	dsn := "host=localhost user=postgres password=Raghav@123 dbname=lib port=5432 sslmode=disable"
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASS"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("DB_PORT"),
+	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
-	err = db.AutoMigrate(&models.User{}, &models.Cart{})
-	if err != nil {
-		return nil, err
-	}
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Cart{})
 	return db, nil
-}
-func AddToCart(userID uint, productID uint) error {
-	db, err := OpenDB()
-	if err != nil {
-		return err
-	}
-
-	cartItem := models.Cart{
-		UserID:    userID,
-		ProductID: productID,
-		Quantity:  1, // You can change this quantity as required.
-	}
-
-	if err := db.Create(&cartItem).Error; err != nil {
-		return err
-	}
-
-	return nil
 }

@@ -72,8 +72,12 @@ h5 {
     font-weight: 600;
     font-size: 18px;
 }
-
-.addtocart {
+.buttons{
+    margin-top: 40px;
+    display: flex;
+    gap: 2vh;
+}
+.buttons button{
     padding: 15px 15vh;
     font-family: 'Abel', sans-serif;
     font-size: 20px;
@@ -81,43 +85,7 @@ h5 {
     color: #fff;
 }
 
-.addtocart:hover {
+.buttons button:hover {
     background-color: #333;
     transition: 0.4s ease-out;
 }
-/* 
-.carousel-container {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-.carousel-slide {
-    display: flex;
-    width: 300%;
-    animation: slide 50s infinite;
-}
-
-.carousel-slide img {
-    width: 100%;
-    height: 100vh;
-    object-fit:contain;
-}
-
-@keyframes slide {
-    0% {
-        transform: translateX(0);
-    }
-
-    33% {
-        transform: translateX(-100%);
-    }
-
-    66% {
-        transform: translateX(-200%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-} */

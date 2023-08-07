@@ -116,7 +116,7 @@ header {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 30vh;
+    width: 40vh;
 }
 
 
@@ -143,16 +143,25 @@ header {
     font-family: 'Abel', sans-serif;
     font-size: 20px;
 }
-
-.addtocart {
-    padding: 5px 5vh;
+.buttons{
+    display:flex;
+}
+.details button{
+    margin: 3px;
+    padding: 2px 2vh;
+    font-family: 'Abel', sans-serif;
+    background-color: black;
+    color: whitesmoke;
+}
+.buttons button{
+    padding: 3px 2vh;
     font-family: 'Abel', sans-serif;
     font-size: 20px;
     background-color: black;
     color: #fff;
 }
 
-.addtocart:hover {
+.buttons button:hover {
     background-color: #333;
     transition: 0.4s ease-out;
 }
