@@ -20,7 +20,7 @@ function addToCart(productId){
   });
 }
 function fetchproducts() {
-  fetch('/')
+  fetch('/home')
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -57,7 +57,7 @@ function fetchproducts() {
 }
 fetchproducts();
 function fetchcat() {
-  fetch('/')
+  fetch('/home')
     .then(response => response.json())
     .then(data => {
       let categories = document.querySelector('.categories');

@@ -1,0 +1,51 @@
+/* Style for the form container */
+.form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+/* Style for form labels */
+label {
+    font-weight: bold;
+}
+
+/* Style for form input fields */
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+/* Style for file input */
+input[type="file"] {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Style for submit button */
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Add some spacing */
+.form h1 {
+    margin-bottom: 20px;
+}

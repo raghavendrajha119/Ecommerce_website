@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Electrolize&family=Georama:wght@200&family=Montserrat:wght@100&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+nav {
+    background-color: black;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+nav a:hover {
+    background-color: #333;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container {
+    margin: 25px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.img img {
+    width: 50vh;
+    height: 60vh;
+
+}
+
+.details {
+    padding: 35px;
+}
+
+.details h2 {
+    font-family: 'Electrolize', sans-serif;
+    font-size: 35px;
+}
+
+.cat {
+    font-family: 'Abel', sans-serif;
+    font-size: 25px;
+}
+
+.desc {
+    font-family: 'Georama', sans-serif;
+    font-weight: 700;
+}
+
+h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+}
+.buttons{
+    margin-top: 40px;
+    display: flex;
+    gap: 2vh;
+}
+.buttons button{
+    padding: 15px 15vh;
+    font-family: 'Abel', sans-serif;
+    font-size: 20px;
+    background-color: black;
+    color: #fff;
+}
+
+.buttons button:hover {
+    background-color: #333;
+    transition: 0.4s ease-out;
+}

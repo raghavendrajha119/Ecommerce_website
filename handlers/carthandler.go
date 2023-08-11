@@ -11,7 +11,7 @@ import (
 func AddtoCart(c *fiber.Ctx) error {
 	if tokenCookie := c.Cookies("jwt"); tokenCookie != "" {
 		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
-			return []byte(config.Secret), nil
+			return []byte(config.GetSecret()), nil
 		})
 		if err == nil && token.Valid {
 			claims := token.Claims.(jtoken.MapClaims)
@@ -46,7 +46,7 @@ func AddtoCart(c *fiber.Ctx) error {
 func GetfromCart(c *fiber.Ctx) error {
 	if tokenCookie := c.Cookies("jwt"); tokenCookie != "" {
 		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
-			return []byte(config.Secret), nil
+			return []byte(config.GetSecret()), nil
 		})
 		if err == nil && token.Valid {
 			claims := token.Claims.(jtoken.MapClaims)

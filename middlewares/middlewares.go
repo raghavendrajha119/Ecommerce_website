@@ -7,7 +7,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
-	"github.com/raghavendrajha119/Ecommerce_website/config"
+	jtoken "github.com/golang-jwt/jwt/v4"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
@@ -33,12 +33,19 @@ func ComparePasswords(hashedPwd, plainPwd string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(plainPwd), []byte(hashedPwd))
 	return err == nil
 }
+func UserTypeCheck(userType string) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		user := c.Locals("user").(*jtoken.Token)
+		claims := user.Claims.(jtoken.MapClaims)
+		role := claims["role"].(string)
+		if role == userType {
+			return c.Next()
+		}
 
-func CheckJWT(c *fiber.Ctx, cookieName string) error {
-	return jwtware.New(jwtware.Config{
-		SigningKey:  []byte(config.Secret),
-		TokenLookup: fmt.Sprintf("cookie:%s", cookieName),
-	})(c)
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+			"error": "Access forbidden",
+		})
+	}
 }
 
 // gorm connection syntax

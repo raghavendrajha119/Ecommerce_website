@@ -14,6 +14,7 @@ type User struct {
 	Name     string
 	Email    string `gorm:"unique"`
 	Password string
+	Role     string
 }
 type Register struct {
 	Name     string
@@ -27,6 +28,7 @@ type Product struct {
 	Price       float64
 	Description string
 	Category    string
+	Image       string
 }
 type Cart struct {
 	gorm.Model

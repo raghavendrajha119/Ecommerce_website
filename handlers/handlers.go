@@ -35,7 +35,7 @@ func LoginPg(c *fiber.Ctx) error {
 func Dashboard(c *fiber.Ctx) error {
 	if tokenCookie := c.Cookies("jwt"); tokenCookie != "" {
 		token, err := jtoken.Parse(tokenCookie, func(token *jtoken.Token) (interface{}, error) {
-			return []byte(config.Secret), nil
+			return []byte(config.GetSecret()), nil
 		})
 		if err == nil && token.Valid {
 			claims := token.Claims.(jtoken.MapClaims)
@@ -71,12 +71,13 @@ func Login(c *fiber.Ctx) error {
 		"ID":    user.ID,
 		"email": user.Email,
 		"name":  user.Name,
+		"role":  user.Role,
 		"exp":   time.Now().Add(day * 1).Unix(),
 	}
 	// Creating token
 	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, claims)
 	// Generating encoded token and send it as response.
-	t, err := token.SignedString([]byte(config.Secret))
+	t, err := token.SignedString([]byte(config.GetSecret()))
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
@@ -89,8 +90,10 @@ func Login(c *fiber.Ctx) error {
 		Expires: time.Now().Add(time.Hour * 24),
 	})
 	// Redirect the user to the desired page after successful login
-	if user.Name != "" {
+	if user.Role == "user" {
 		return c.Redirect("/dashboard")
+	} else if user.Role == "admin" {
+		return c.Redirect("/admin/Dashboard.html")
 	} else {
 		return c.JSON(fiber.Map{
 			"msg": "Invalid",
@@ -140,6 +143,7 @@ func RegisterPost(c *fiber.Ctx) error {
 		Name:     result.Name,
 		Email:    result.Email,
 		Password: hashpassword,
+		Role:     "user",
 	}
 	if err := db.Create(&users).Error; err != nil {
 		panic(err)
@@ -150,11 +154,12 @@ func RegisterPost(c *fiber.Ctx) error {
 		"ID":    users.ID,
 		"email": users.Email,
 		"name":  users.Name,
+		"role":  users.Role,
 		"exp":   time.Now().Add(day * 1).Unix(),
 	}
 
 	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, claims)
-	t, err := token.SignedString([]byte(config.Secret))
+	t, err := token.SignedString([]byte(config.GetSecret()))
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
@@ -169,5 +174,13 @@ func RegisterPost(c *fiber.Ctx) error {
 	})
 
 	// Redirect the user to the dashboard page after successful registration
-	return c.Redirect("/dashboard")
+	if users.Role == "user" {
+		return c.Redirect("/dashboard")
+	} else if users.Role == "admin" {
+		return c.Redirect("/admin/Dashboard.html")
+	} else {
+		return c.JSON(fiber.Map{
+			"msg": "Invalid",
+		})
+	}
 }
