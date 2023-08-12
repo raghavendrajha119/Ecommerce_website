@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/admin/addproduct.css">
+    <link rel="stylesheet" href="../styles/admin/nav.css">
     <title>Add a product</title>
 </head>
 
 <body>
-    <h1>Add a Product</h1>
+    <nav class="admin">
+        <div class="logo">Add Product</div>
+        <div>
+            <a href="../Home.html">Home</a>
+            <a href="./Products.html">Products</a>
+            <a href="./Customers.html">Customers</a>
+            <a href="./Dashboard.html">Dashboard</a>
+        </div>
+    </nav>
     <div class="form">
         <form action="/admin/add-products" method="POST" enctype="multipart/form-data">
             <label for="title">Title:</label>

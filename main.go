@@ -58,9 +58,12 @@ func main() {
 		}
 		return c.Next()
 	})
-	admin.Get("/", handlers.AdminDashboard)
+	admin.Get("/dashboard", handlers.AdminDashboard)
 	admin.Get("/products", handlers.AdminProducts)
 	admin.Post("/add-products", handlers.AdminaddProducts)
+	admin.Get("/users", handlers.AdminGetUsers)
+	admin.Post("/make-admin/:id", handlers.AdminMakeAdmin)
+	admin.Post("/remove-admin/:id", handlers.AdminRemoveAdmin)
 	// Listen on port 3000
 	app.Listen(":3000")
 }

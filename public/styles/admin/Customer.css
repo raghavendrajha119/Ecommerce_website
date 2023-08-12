@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Electrolize&family=Georama:wght@200&family=Montserrat:wght@100&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat',sans-serif;
+}
+.user-list{
+    display: flex;
+    flex-direction: column;
+}
+.user{
+    display: flex;
+    justify-content:space-between;
+    margin: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-family: 'Electrolize',sans-serif;
+}
+.buttons{
+    margin: 5vh;
+}
+.buttons button{
+    padding: 5px;
+    border: none;
+    color: white;
+    background-color: black;
+}
+.buttons button:hover{
+    background-color: #333;
+}

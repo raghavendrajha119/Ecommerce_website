@@ -1,19 +1,25 @@
-/* Style for the form container */
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Electrolize&family=Georama:wght@200&family=Montserrat:wght@100&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat',sans-serif;
+}
+
 .form {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin: 5vh 20vh;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
+    font-family: 'Electrolize',sans-serif;
 }
 
-/* Style for form labels */
 label {
     font-weight: bold;
 }
 
-/* Style for form input fields */
 input[type="text"],
 input[type="number"],
 textarea {
@@ -25,27 +31,24 @@ textarea {
     box-sizing: border-box;
 }
 
-/* Style for file input */
 input[type="file"] {
     display: block;
     margin-top: 5px;
 }
 
-/* Style for submit button */
 input[type="submit"] {
-    background-color: #4caf50;
+    background-color: black;
     color: white;
     padding: 10px 15px;
     border: none;
-    border-radius: 3px;
+    border-radius: 0;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #333;
 }
 
-/* Add some spacing */
 .form h1 {
     margin-bottom: 20px;
 }

@@ -64,3 +64,32 @@ func OpenDB() (*gorm.DB, error) {
 	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Cart{})
 	return db, nil
 }
+
+// counts user and products
+func GetTotalUsers(db *gorm.DB) (int64, error) {
+	var count int64
+	if err := db.Model(&models.User{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+func GetTotalProducts(db *gorm.DB) (int64, error) {
+	var count int64
+	if err := db.Model(&models.Product{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+func GetTotalAdminUsers(db *gorm.DB) (int64, error) {
+	var count int64
+	if err := db.Model(&models.User{}).Where("role = ?", "admin").Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+// Handling admin make and remove
+func UpdateUserRole(db *gorm.DB, userID uint, newRole string) error {
+	return db.Model(&models.User{}).Where("id = ?", userID).Update("role", newRole).Error
+}

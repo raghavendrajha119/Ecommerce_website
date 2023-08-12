@@ -10,7 +10,28 @@ import (
 )
 
 func AdminDashboard(c *fiber.Ctx) error {
-	return c.Render("public/admin/Dashboard.html", nil)
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+	totalUsers, err := middlewares.GetTotalUsers(db)
+	if err != nil {
+		return err
+	}
+	totalAdminUsers, err := middlewares.GetTotalAdminUsers(db)
+	if err != nil {
+		return err
+	}
+	totalProducts, err := middlewares.GetTotalProducts(db)
+	if err != nil {
+		return err
+	}
+	data := fiber.Map{
+		"totalUsers":      totalUsers,
+		"totalAdminUsers": totalAdminUsers,
+		"totalProducts":   totalProducts,
+	}
+	return c.JSON(data)
 }
 func AdminProducts(c *fiber.Ctx) error {
 	db, err := middlewares.OpenDB()
@@ -65,4 +86,57 @@ func AdminaddProducts(c *fiber.Ctx) error {
 }
 func generateImageFilename(productTitle, ext string) string {
 	return productTitle + ext
+}
+
+// user list
+func AdminGetUsers(c *fiber.Ctx) error {
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+
+	var users []models.User
+	if err := db.Find(&users).Error; err != nil {
+		return err
+	}
+
+	return c.JSON(users)
+}
+
+//handling admin-create and remove
+
+func AdminMakeAdmin(c *fiber.Ctx) error {
+	userID, err := strconv.ParseUint(c.Params("id"), 10, 64)
+	if err != nil {
+		return err
+	}
+
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+
+	if err := middlewares.UpdateUserRole(db, uint(userID), "admin"); err != nil {
+		return err
+	}
+
+	return c.SendString("User role updated to admin")
+}
+
+func AdminRemoveAdmin(c *fiber.Ctx) error {
+	userID, err := strconv.ParseUint(c.Params("id"), 10, 64)
+	if err != nil {
+		return err
+	}
+
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+
+	if err := middlewares.UpdateUserRole(db, uint(userID), "user"); err != nil {
+		return err
+	}
+
+	return c.SendString("User role updated to user")
 }
