@@ -52,7 +52,7 @@ func AdminaddProducts(c *fiber.Ctx) error {
 	price, _ := strconv.ParseFloat(c.FormValue("price"), 64)
 	description := c.FormValue("description")
 	category := c.FormValue("category")
-
+	quantity, _ := strconv.Atoi(c.FormValue("quantity"))
 	// Handle image upload
 	file, err := c.FormFile("image")
 	if err != nil {
@@ -73,6 +73,7 @@ func AdminaddProducts(c *fiber.Ctx) error {
 		Description: description,
 		Category:    category,
 		Image:       imagePath,
+		Quantity:    quantity,
 	}
 	db, err := middlewares.OpenDB()
 	if err != nil {
@@ -139,4 +140,40 @@ func AdminRemoveAdmin(c *fiber.Ctx) error {
 	}
 
 	return c.SendString("User role updated to user")
+}
+
+// Edit product
+func AdminEditProduct(c *fiber.Ctx) error {
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+	productID := c.Query("id")
+	var product models.Product
+	if err := db.Find(&product, productID).Error; err != nil {
+		return err
+	}
+	return c.JSON(product)
+}
+func AdminUpdateProduct(c *fiber.Ctx) error {
+	productID := c.Params("id")
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return err
+	}
+
+	var product models.Product
+	if err := db.First(&product, productID).Error; err != nil {
+		return err
+	}
+	product.Title = c.FormValue("title")
+	product.Price, _ = strconv.ParseFloat(c.FormValue("price"), 64)
+	product.Description = c.FormValue("description")
+	product.Category = c.FormValue("category")
+	product.Quantity, _ = strconv.Atoi(c.FormValue("quantity"))
+	if err := db.Save(&product).Error; err != nil {
+		return err
+	}
+
+	return c.Redirect("/admin/Products.html")
 }

@@ -64,6 +64,8 @@ func main() {
 	admin.Get("/users", handlers.AdminGetUsers)
 	admin.Post("/make-admin/:id", handlers.AdminMakeAdmin)
 	admin.Post("/remove-admin/:id", handlers.AdminRemoveAdmin)
+	admin.Get("/edit-product", handlers.AdminEditProduct)
+	admin.Post("/update-product/:id", handlers.AdminUpdateProduct)
 	// Listen on port 3000
 	app.Listen(":3000")
 }

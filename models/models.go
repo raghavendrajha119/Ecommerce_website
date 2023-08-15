@@ -29,6 +29,7 @@ type Product struct {
 	Description string
 	Category    string
 	Image       string
+	Quantity    int
 }
 type Cart struct {
 	gorm.Model

@@ -1,5 +1,5 @@
 const userListContainer = document.querySelector('.user-list');
-
+function fetchUserList(){
 fetch('/admin/users', {
     method: 'GET',
 })
@@ -27,23 +27,46 @@ fetch('/admin/users', {
         const userId = button.getAttribute('data-id');
 
         if (button.classList.contains('make-admin')) {
-            updateRole(userId, 'admin');
+            RoleUser(userId, 'admin');
         } else if (button.classList.contains('remove-admin')) {
-            updateRole(userId, 'user');
+            RoleAdmin(userId, 'user');
         }
     });
 })
 .catch(error => {
     console.error('Error fetching user data:', error);
 });
-
-function updateRole(userId, newRole) {
+}
+fetchUserList();
+function RoleUser(userId, newRole) {
     fetch(`/admin/make-admin/${userId}`, {
         method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({ role: newRole }),
     })
     .then(response => response.text())
     .then(message => {
         console.log(message);
+        fetchUserList();
+    })
+    .catch(error => {
+        console.error('Error updating user role:', error);
+    });
+}
+function RoleAdmin(userId, newRole) {
+    fetch(`/admin/remove-admin/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({ role: newRole }),
+    })
+    .then(response => response.text())
+    .then(message => {
+        console.log(message);
+        fetchUserList();
     })
     .catch(error => {
         console.error('Error updating user role:', error);
