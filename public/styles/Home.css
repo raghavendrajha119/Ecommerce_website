@@ -114,8 +114,9 @@ header {
 .card {
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
+    margin-bottom: 5px;
     width: 40vh;
 }
 
@@ -234,4 +235,19 @@ footer {
 
 #scrollToTopBtn::after {
     background-color: rgb(12, 96, 151);
+}
+.cat button{
+    background-color: #080404;
+    color: white;
+    padding: 5px;
+    border-radius: 15px;
+}
+.cat img{
+    border-radius: 50%;
+}
+.cat button:hover{
+    background-color: #222;
+}
+.search button:hover{
+    background-color: #444;
 }

@@ -35,9 +35,14 @@ func main() {
 	app.Get("/logout", handlers.Logout)
 	//product route
 	app.Get("/products", handlers.ProductHandler)
+	//api end-pint for similar product
+	app.Get("/similar-products", handlers.SimilarProducts)
+	//categories route
+	app.Get("/categories", handlers.Categories)
 	//cart route
 	app.Post("/add-to-cart", handlers.AddtoCart)
 	app.Get("/get-cart", handlers.GetfromCart)
+	app.Post("/update-cart-quantity", handlers.UpdateCartQuantity)
 	//admin routes
 	admin := app.Group("/admin")
 	admin.Use(func(c *fiber.Ctx) error {

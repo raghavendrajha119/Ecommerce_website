@@ -184,3 +184,16 @@ func RegisterPost(c *fiber.Ctx) error {
 		})
 	}
 }
+func Categories(c *fiber.Ctx) error {
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		panic(err)
+	}
+
+	var categories []string
+	if err := db.Model(&models.Product{}).Pluck("DISTINCT category", &categories).Error; err != nil {
+		return err
+	}
+
+	return c.JSON(categories)
+}

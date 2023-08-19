@@ -1,3 +1,6 @@
+function seedetails(productId){
+  window.location.href = `/product.html?id=${productId}`;
+}
 function fetchData() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
@@ -29,9 +32,34 @@ function fetchData() {
         card.appendChild(prodImg);
         card.appendChild(prodDiv);
         productContainer.appendChild(card);
+        // Fetch similar products based on the current product's details
+      fetch(`/similar-products?title=${product.Title}&description=${product.Description}&category=${product.Category}`)
+      .then(response => response.json())
+      .then(similarProducts => {
+        displaySimilarItemsSuggestions(similarProducts);
+      });
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
       });
   }
-fetchData();  
+fetchData();
+
+// Function to display similar items suggestions
+function displaySimilarItemsSuggestions(suggestions) {
+  const similarItemsContainer = document.querySelector('.similar-items-container');
+  similarItemsContainer.innerHTML = '';
+  console.log(suggestions)
+  suggestions.forEach(suggestion => {
+      const suggestionDiv = document.createElement('div');
+      suggestionDiv.classList.add('similar-item');
+      suggestionDiv.innerHTML = `
+        <div class="card">
+          <img src="./img/${suggestion.Title}.jpg" alt="${suggestion.Title}">
+          <p>${suggestion.Title}</p>
+          <button class="seedetails" type="submit" onclick="seedetails('${suggestion.ID}')">Details</button>
+        </div>
+      `;
+      similarItemsContainer.appendChild(suggestionDiv);
+  });
+}

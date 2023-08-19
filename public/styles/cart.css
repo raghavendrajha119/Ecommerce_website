@@ -122,3 +122,12 @@ nav a:hover {
     display: flex;
     gap: 15vh;
 }
+.Quantiy_buttons button{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 5px;
+}
+.Quantiy_buttons button:hover{
+    background-color: #333;
+}
