@@ -61,7 +61,7 @@ func OpenDB() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Cart{})
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Cart{}, &models.BoughtProduct{})
 	return db, nil
 }
 

@@ -1,6 +1,47 @@
 function seedetails(productId){
     window.location.href = `/product.html?id=${productId}`;
 }
+function proceedtobuy() {
+    fetch('/checkout', {
+        method: 'POST', // Assuming this is the endpoint for checkout
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Checkout response:", data);
+        if (data.message === "Purchase completed successfully.") {
+            const url = `/shopsuccess.html`;
+            window.location.href = url;
+        } else {
+            console.log("Checkout failed:", data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error during checkout: ', error);
+    });
+}
+
+function removeprod(productId){
+    fetch('/remove-from-cart',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            productId: parseInt(productId)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        fetchitems();
+    })
+    .catch(error => {
+        alert('Error removing product: ' + error);
+    });
+}
 function updateQuantityInDatabase(productId,newQuantity) {
     fetch('/update-cart-quantity', {
         method: 'POST',
@@ -33,6 +74,8 @@ function fetchitems() {
             console.log(data)
             const cartContainer = document.getElementById('cartContainer');
             cartContainer.innerHTML = '';
+            const cartproceedbuy = document.createElement('div');
+            cartproceedbuy.classList.add('proceedcart');
             data.forEach(item => {
                 const cartItem = document.createElement('div');
                 cartItem.classList.add('cart-item');
@@ -53,7 +96,7 @@ function fetchitems() {
                 <div class="buttons">
                     <button class="Details" type="submit" onclick="seedetails('${item.ID}')">Details</button>
                     <button class="Buynow">Buy Now</button>
-                    <button class="removefromcart" id="removeprod">Remove</button>
+                    <button class="removefromcart" id="removeprod" onclick="removeprod('${item.ID}')">Remove</button>
                 </div>
                 `;
                 const Productimg = document.createElement('div');
@@ -64,15 +107,17 @@ function fetchitems() {
                 cartItem.appendChild(Productimg);
                 cartItem.appendChild(Cartdetails);
                 cartContainer.appendChild(cartItem);
-                // After fetching cart items and creating cartItem
                 const updateQuantityBtn = cartItem.querySelector('.update-quantity');
                 updateQuantityBtn.addEventListener('click', () => {
                     const productId = updateQuantityBtn.getAttribute('data-product-id');
                     const newQuantity = cartItem.querySelector('.quantity-input').value;
                     updateQuantityInDatabase(productId, newQuantity);
                 });
-
             });
+            cartproceedbuy.innerHTML=`
+                <button class="cartbuy" type="submit" onclick="proceedtobuy('')">Proceed to checkout</button>
+                `;
+            cartContainer.appendChild(cartproceedbuy);
         })
         .catch(error => {
             console.error('Error fetching cart items: ', error);

@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/raghavendrajha119/Ecommerce_website/middlewares"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
@@ -35,6 +33,5 @@ func SimilarProducts(c *fiber.Ctx) error {
 	if err := db.Where("Title LIKE ? OR Description LIKE ? OR Category = ?", "%"+title+"%", "%"+description+"%", category).Find(&similarProducts).Error; err != nil {
 		return err
 	}
-	fmt.Println(similarProducts)
 	return c.JSON(similarProducts)
 }

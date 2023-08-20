@@ -1,2 +1,0 @@
-INSERT INTO products (title, price, description, category)
-VALUES ('John Hardy Womens Legends Naga Gold & Silver Dragon Station Chain Bracelet', 9999, 'From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the oceans pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.', 'Jewelery');

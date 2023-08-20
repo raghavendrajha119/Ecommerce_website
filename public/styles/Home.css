@@ -251,3 +251,6 @@ footer {
 .search button:hover{
     background-color: #444;
 }
+button:hover{
+    cursor: pointer;
+}

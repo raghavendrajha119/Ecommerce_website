@@ -43,6 +43,10 @@ func main() {
 	app.Post("/add-to-cart", handlers.AddtoCart)
 	app.Get("/get-cart", handlers.GetfromCart)
 	app.Post("/update-cart-quantity", handlers.UpdateCartQuantity)
+	app.Post("/remove-from-cart", handlers.RemoveFromCart)
+	//checkout
+	app.Post("/checkout", handlers.Checkout)
+	app.Get("/get-bought-products", handlers.GetBoughtProducts)
 	//admin routes
 	admin := app.Group("/admin")
 	admin.Use(func(c *fiber.Ctx) error {

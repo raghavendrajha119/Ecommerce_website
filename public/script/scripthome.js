@@ -192,9 +192,11 @@ if (cookies !== "") {
 else {
   let logout = document.getElementById('logout');
   let cart = document.getElementById('cart');
+  let orders =document.getElementById('Orders')
   logout.style.display = 'none';
   cart.style.display = 'none';
   dashboard.style.display = 'none';
+  orders.style.display='none'
 }
 //scroll to top function for UI
 window.addEventListener('scroll', function () {

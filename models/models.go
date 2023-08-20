@@ -37,3 +37,10 @@ type Cart struct {
 	ProductID uint
 	Quantity  int
 }
+type BoughtProduct struct {
+	gorm.Model
+	UserID      uint
+	ProductID   uint
+	Quantity    int
+	TotalAmount float64
+}

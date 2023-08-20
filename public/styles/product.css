@@ -121,3 +121,6 @@ h5 {
 .similar-items-container .card button:hover{
     background-color: #333;
 }
+button:hover{
+    cursor: pointer;
+}

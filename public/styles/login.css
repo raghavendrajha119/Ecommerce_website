@@ -112,4 +112,7 @@ button[type="submit"] {
     border: none;
     cursor: pointer;
 }
+button:hover{
+    cursor: pointer;
+}
   
