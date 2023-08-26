@@ -32,3 +32,22 @@ func FindByCredentials(email, password string) (*models.User, error) {
 	}
 	// here i am using a ComparePasswords function called in middleware which when called returns the true/false based on password
 }
+func FindByGoogleAcc(email, password string) (*models.User, error) {
+	db, err := middlewares.OpenDB()
+	if err != nil {
+		return nil, err
+	}
+	user := models.User{}
+	db.Where("email = ?", email).First(&user)
+
+	if user.ID == 0 {
+		return nil, errors.New("user not found")
+
+	}
+
+	if password != user.Password {
+		return nil, errors.New("invalid password")
+	}
+
+	return &user, nil
+}

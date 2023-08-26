@@ -2,6 +2,8 @@ package handlers
 
 // It handles the functionalities various render,redirect and response operations
 import (
+	"fmt"
+	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,6 +13,8 @@ import (
 	"github.com/raghavendrajha119/Ecommerce_website/middlewares"
 	"github.com/raghavendrajha119/Ecommerce_website/models"
 	"github.com/raghavendrajha119/Ecommerce_website/repository"
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/google"
 )
 
 // Home page
@@ -50,6 +54,101 @@ func Dashboard(c *fiber.Ctx) error {
 		}
 	}
 	return c.Redirect("/login")
+}
+func GoogleAuthStart(c *fiber.Ctx) error {
+	oauthConf := &oauth2.Config{
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		RedirectURL:  "http://localhost:3000/auth/google/callback",
+		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
+		Endpoint:     google.Endpoint,
+	}
+	url := oauthConf.AuthCodeURL("state", oauth2.AccessTypeOffline)
+	return c.Redirect(url)
+}
+func GoogleAuthCallback(c *fiber.Ctx) error {
+	oauthConf := &oauth2.Config{
+		ClientID:     os.Getenv("CLIENT_ID"),
+		ClientSecret: os.Getenv("CLIENT_SECRET"),
+		RedirectURL:  "http://localhost:3000/auth/google/callback",
+		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
+		Endpoint:     google.Endpoint,
+	}
+
+	code := c.Query("code")
+
+	token, err := oauthConf.Exchange(c.Context(), code)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Refesh :", token.RefreshToken, "Access :", token.AccessToken)
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	profile, err := models.ConvertToken(token.AccessToken)
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	_, err = repository.FindByGoogleAcc(profile.Email, profile.SUB)
+	if err != nil {
+		if err.Error() == "user not found" {
+
+			db, err := middlewares.OpenDB()
+			if err != nil {
+				return c.JSON(err)
+			}
+
+			user := models.User{
+				Email:    profile.Email,
+				Password: profile.SUB,
+				Name:     profile.GivenName,
+				Role:     "user",
+			}
+			err = db.Create(&user).Error
+			if err != nil {
+				return c.JSON(err)
+			}
+		}
+	}
+	day := time.Hour * 24
+	FindUserCredReg, err := repository.FindByGoogleAcc(profile.Email, profile.SUB)
+
+	if err != nil {
+
+		return c.JSON(err)
+	}
+
+	claims := jtoken.MapClaims{
+		"ID":       FindUserCredReg.ID,
+		"email":    FindUserCredReg.Email,
+		"name":     FindUserCredReg.Name,
+		"usertype": FindUserCredReg.Role,
+		"exp":      time.Now().Add(day * 1).Unix(),
+	}
+
+	jwttoken := jtoken.NewWithClaims(jtoken.SigningMethodHS256, claims)
+
+	t, err := jwttoken.SignedString([]byte(config.GetSecret()))
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+	c.Cookie(&fiber.Cookie{
+		Name:    "jwt",
+		Value:   t,
+		Expires: time.Now().Add(24 * time.Hour),
+	})
+	if FindUserCredReg.Role == "user" {
+		return c.Redirect("/dashboard.html")
+	} else if FindUserCredReg.Role == "admin" {
+		return c.Redirect("/admin/Dashboard.html")
+	} else {
+		return c.JSON(fiber.Map{
+			"msg": "Invalid",
+		})
+	}
+
 }
 
 // Login route

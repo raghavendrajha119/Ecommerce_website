@@ -80,9 +80,9 @@ body{
     width: 150px;
     display: block;
     padding: 8px 5px;
-    border-radius: 20px;
+    border-radius: 0;
     text-decoration: none;
-    background-color: #ff7846;
+    background-color: #000000;
 }
 hr{
     z-index: 1;
@@ -106,8 +106,8 @@ input[type="password"] {
 button[type="submit"] {
     font-size: 18px;
     padding: 10px 15px;
-    border-radius: 5px;
-    background-color: #ff7846;
+    border-radius: 0;
+    background-color: #000000;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -115,4 +115,20 @@ button[type="submit"] {
 button:hover{
     cursor: pointer;
 }
-  
+.google-box {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+.google-login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}

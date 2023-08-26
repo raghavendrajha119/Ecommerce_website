@@ -33,6 +33,9 @@ func main() {
 	app.Get("/dashboard", handlers.Dashboard)
 	//logout
 	app.Get("/logout", handlers.Logout)
+	//google auth
+	app.Get("/auth/google", handlers.GoogleAuthStart)
+	app.Get("/auth/google/callback", handlers.GoogleAuthCallback)
 	//product route
 	app.Get("/products", handlers.ProductHandler)
 	//api end-pint for similar product
