@@ -5,7 +5,7 @@
 
 
 ## Features
-Jwt authentication,admin and user page,purchase goods,cart system,user profile page,product description page and similar items suggestion.
+Jwt authentication,Google authentication,admin and user page,purchase goods,cart system,user profile page,product description page,search operation and similar items suggestion.
 
 
 ## Directory Structure
