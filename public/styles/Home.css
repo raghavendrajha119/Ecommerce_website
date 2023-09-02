@@ -144,17 +144,20 @@ header {
     font-family: 'Abel', sans-serif;
     font-size: 20px;
 }
-.buttons{
-    display:flex;
+
+.buttons {
+    display: flex;
 }
-.details button{
+
+.details button {
     margin: 3px;
     padding: 2px 2vh;
     font-family: 'Abel', sans-serif;
     background-color: black;
     color: whitesmoke;
 }
-.buttons button{
+
+.buttons button {
     padding: 3px 2vh;
     font-family: 'Abel', sans-serif;
     font-size: 20px;
@@ -236,21 +239,93 @@ footer {
 #scrollToTopBtn::after {
     background-color: rgb(12, 96, 151);
 }
-.cat button{
+
+.cat button {
     background-color: #080404;
     color: white;
     padding: 5px;
     border-radius: 15px;
 }
-.cat img{
+
+.cat img {
     border-radius: 50%;
 }
-.cat button:hover{
+
+.cat button:hover {
     background-color: #222;
 }
-.search button:hover{
+
+.search button:hover {
     background-color: #444;
 }
-button:hover{
+
+button:hover {
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .search {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .search_items {
+        width: 100%;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #000;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .navbar a {
+        margin: 5px 0;
+        padding: 10px 0;
+    }
+
+    #menu-icon {
+        display: block;
+    }
+
+    .logo {
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading {
+        font-size: 16px;
+    }
+
+    .search_items {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .search-button {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .navbar a {
+        font-size: 18px;
+        margin: 5px 10px;
+        padding: 5px 0;
+    }
+
+    .details h5 {
+        font-size: 18px;
+    }
 }

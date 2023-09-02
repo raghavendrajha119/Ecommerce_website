@@ -132,3 +132,27 @@ button:hover{
     border-radius: 5px;
     font-weight: bold;
 }
+@media (max-width:768px){
+    h2{
+        font-size: 40px;
+    }
+    h3{
+        font-size: 30px;
+    }
+    .op{
+        width:90%;
+        padding-top: 15%;
+    }
+    .form{
+        padding-top: 30px;
+    }
+    #name,#email,#password{
+        font-size: 18px;
+    }
+    button[type="submit"]{
+        font-size: 18px;
+    }
+    .google-box{
+        margin-top: 15px;
+    }
+}
