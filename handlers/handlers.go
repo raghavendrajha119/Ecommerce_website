@@ -59,7 +59,7 @@ func GoogleAuthStart(c *fiber.Ctx) error {
 	oauthConf := &oauth2.Config{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
-		RedirectURL:  "http://localhost:3000/auth/google/callback",
+		RedirectURL:  os.Getenv("REDIRECT_URL"),
 		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
 		Endpoint:     google.Endpoint,
 	}
@@ -70,7 +70,7 @@ func GoogleAuthCallback(c *fiber.Ctx) error {
 	oauthConf := &oauth2.Config{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
-		RedirectURL:  "http://localhost:3000/auth/google/callback",
+		RedirectURL:  os.Getenv("REDIRECT_URL"),
 		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"},
 		Endpoint:     google.Endpoint,
 	}
